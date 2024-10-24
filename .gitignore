@@ -6,4 +6,4 @@ build
 .vscode
 .DS_STORE
 .idea
-gradle.propertiesgradle.properties
+gradle.properties
