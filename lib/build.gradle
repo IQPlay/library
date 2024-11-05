@@ -35,7 +35,8 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testImplementation libs.junit.jupiter
+
+    // testImplementation libs.junit.jupiter
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
