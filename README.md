@@ -10,3 +10,4 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=IQPlay_library&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=IQPlay_library)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=IQPlay_library&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=IQPlay_library)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=IQPlay_library&metric=coverage)](https://sonarcloud.io/summary/new_code?id=IQPlay_library)
+[![codecov](https://codecov.io/github/IQPlay/library/graph/badge.svg?token=vT0cGItXEP)](https://codecov.io/github/IQPlay/library)

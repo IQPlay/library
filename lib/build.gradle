@@ -10,7 +10,8 @@ plugins {
     id 'java-library'
     id "org.sonarqube" version "5.1.0.4882"
     id 'maven-publish'
-//    id 'jacoco' // For test coverage
+    id 'jacoco'
+
     // For generate doc
     id 'org.asciidoctor.jvm.convert' version '4.0.2'
     id 'org.asciidoctor.jvm.pdf' version '4.0.2'
@@ -70,6 +71,20 @@ asciidoctorj {
             'rouge-theme': 'github'
 }
 
+jacoco {
+    toolVersion = "0.8.12" // JaCoCo version
+}
+jacocoTestReport {
+    reports {
+        xml.required.set(true) // Necessary for badge services to read reports
+        html.required.set(true)
+    }
+}
+test {
+    finalizedBy jacocoTestReport // Generates JaCoCo report after testing
+}
+
+
 group="fr.parisnanterre"
 version="0.0.1"
 
@@ -94,6 +109,9 @@ publishing {
     }
 }
 
+tasks.named('check').configure {
+    dependsOn tasks.named('jacocoTestReport')
+}
 // edit the build task to generate the asciidoc pdf too
 tasks.named('asciidoctor').configure {
     dependsOn tasks.named('asciidoctorPdf')
