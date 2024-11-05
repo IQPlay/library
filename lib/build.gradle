@@ -10,6 +10,10 @@ plugins {
     id 'java-library'
     id "org.sonarqube" version "5.1.0.4882"
     id 'maven-publish'
+//    id 'jacoco' // For test coverage
+    // For generate doc
+    id 'org.asciidoctor.jvm.convert' version '4.0.2'
+    id 'org.asciidoctor.jvm.pdf' version '4.0.2'
 }
 
 sonar {
@@ -43,6 +47,32 @@ java {
     }
 }
 
+asciidoctor {
+    sourceDir = file('src/docs/')
+    outputDir = file("${buildDir}/docs")
+}
+
+asciidoctorPdf {
+    sourceDir = file('src/docs/')
+    outputDir = file("${buildDir}/docs")
+}
+
+asciidoctorj {
+    requires 'rouge'
+    modules {
+        diagram.use()
+        diagram.version '1.5.16'
+    }
+    attributes 'build-gradle': file('build.gradle'),
+            'sourcedir': project.sourceSets.main.java.srcDirs[0],
+            'source-highlighter': 'rouge',
+            'rouge-style': 'github',
+            'rouge-theme': 'github'
+}
+
+group="fr.parisnanterre"
+version="0.0.1"
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -62,4 +92,12 @@ publishing {
             }
         }
     }
+}
+
+// edit the build task to generate the asciidoc pdf too
+tasks.named('asciidoctor').configure {
+    dependsOn tasks.named('asciidoctorPdf')
+}
+tasks.named('build').configure {
+    dependsOn tasks.named('asciidoctor')
 }

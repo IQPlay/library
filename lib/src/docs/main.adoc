@@ -1,0 +1,16 @@
+= IQPlayLib
+
+:plantuml:
+
+== IQP
+
+==  Team
+- Sami Letellier
+- Mathieu Baleydier
+- Changkai Wang
+
+== Application Goal
+adfda adfdaf
+
+== Architecture (diagramme de classe)
+plantuml::src/docs//models/diagrams/architecture.puml[svg]
