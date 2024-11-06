@@ -1,54 +1,30 @@
-# Doxyfile 1.9.4
-
 # Nom du projet
-PROJECT_NAME           = IQPlayLib
+PROJECT_NAME           = "IQPlayLib"
+PROJECT_NUMBER         = "0.2"
 
-# Version du projet (modifiez-la si nécessaire)
-PROJECT_NUMBER         = 1.0.0
-
-# Chemin des fichiers d'entrée
-INPUT                  = lib/src/main
-
-# Extensions de fichiers à inclure
+# Dossier source à scanner
+INPUT                  = lib/src/main/
 FILE_PATTERNS          = *.java
 
-# Activer la recherche dans les sous-dossiers
+# Générer de la documentation en HTML et XML
+GENERATE_HTML          = YES
+GENERATE_XML           = YES
+
+# Répertoires de sortie pour la documentation HTML et XML
+HTML_OUTPUT            = doxygen/html
+XML_OUTPUT             = doxygen/xml
+
+# Activer la recherche récursive dans le dossier source
 RECURSIVE              = YES
 
-# Activer les commentaires javadoc
+# Options pour les JavaDoc (si tu utilises un format de commentaire spécifique à Java)
 JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
 
-# Sortie de documentation HTML
-GENERATE_HTML          = YES
-HTML_OUTPUT            = docs/html
-
-# Sortie de documentation LaTeX (facultatif)
-GENERATE_LATEX         = NO
-
-# Sortie de documentation pour Doxygen XML (utile pour l'intégration AsciiDoctor)
-GENERATE_XML           = YES
-XML_OUTPUT             = docs/xml
-
-# Exclure des dossiers ou fichiers spécifiques si nécessaire
-EXCLUDE_PATTERNS       = */test/*
-
-# Configuration supplémentaire pour l'esthétique et les détails
-FULL_PATH_NAMES        = NO
-OPTIMIZE_OUTPUT_FOR_C  = NO
-INLINE_INHERITED_MEMB  = YES
-SHOW_INCLUDE_FILES     = NO
-SORT_MEMBER_DOCS       = YES
-SORT_BRIEF_DOCS        = YES
-SORT_BY_SCOPE_NAME     = YES
-
-# Activer la génération de diagrammes UML si Graphviz est installé
-HAVE_DOT               = YES
-DOT_NUM_THREADS        = 2
-GENERATE_UML           = YES
-
-# Ne pas afficher les fichiers dans la documentation
-SHOW_FILES             = NO
-SHOW_NAMESPACES        = NO
-
-# Commentaires multi-lignes pris en charge
-MULTILINE_CPP_IS_BRIEF = YES
+# Autres configurations optionnelles que tu peux personnaliser
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES
