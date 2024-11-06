@@ -51,13 +51,13 @@ java {
 }
 
 asciidoctor {
-    sourceDir = file('src/docs/')
-    outputDir = file("${buildDir}/docs")
+    sourceDir = file('src/docs')
+    outputDir = file("${buildDir}/docs/asciidoctor")
 }
 
 asciidoctorPdf {
-    sourceDir = file('src/docs/')
-    outputDir = file("${buildDir}/docs")
+    sourceDir = file('src/docs')
+    outputDir = file("${buildDir}/docs/asciidoctorPdf")
 }
 
 asciidoctorj {
