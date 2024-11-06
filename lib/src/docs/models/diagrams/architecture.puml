@@ -1,53 +1,188 @@
 @startuml
-'https://plantuml.com/class-diagram
+package fr.parisNanterre.iqplaylib.api {
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface IAnswer {
+    + String answer()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+interface ICorrectAnswer extends IAnswer
+
+interface IDifficultyStrategy {
+    + void init(ILevel level)
+    + void update(ILevel level)
+    + IQuestion generateQuestion()
 }
 
-@enduml@startuml
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface IGame {
+    + String name()
+    + IGameSession createSession() throws SessionAlreadyExistsException
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+interface IGameSession {
+    + void start()
+    + void pause()
+    + void end()
+    + ILevel level()
+    + IScore score()
+    + StateGameSessionEnum state()
+    + IQuestion nextQuestion()
+    + void submitAnswer(IPlayerAnswer answer)
 }
 
+interface ILevel {
+    + void init()
+    + int level()
+    + void levelUp()
+    + void levelDown()
+}
+
+interface IPlayerAnswer extends IAnswer
+
+interface IQuestion {
+    + String question()
+    + ICorrectAnswer correctAnswer()
+}
+
+interface IQuestionGenerator {
+    + IQuestion generateQuestion()
+}
+
+interface IQuestionStorageSession {
+    + IQuestion lastQuestion()
+    + List<IQuestion> questions()
+    + List<ICorrectAnswer> correctAnswers()
+    + List<IPlayerAnswer> playerAnswers()
+    + IScore score()
+    + void addQuestion(IQuestion question)
+    + void addPlayerAnswer(IPlayerAnswer answer)
+}
+
+interface IScore {
+    + int score()
+    + void incrementScore(int value)
+}
+
+enum StateGameSessionEnum {
+    CREATED, STARTED, PAUSED, ENDED, INTERRUPTED
+}
+}
+
+package fr.parisNanterre.iqplaylib.core {
+
+abstract class AbstractGame implements IGame {
+    - String name
+    - IGameSession currentSession
+    + AbstractGame(String name)
+    + String name()
+    + IGameSession createSession() throws SessionAlreadyExistsException
+    # abstract IGameSession createGameSession()
+}
+
+abstract class AbstractGameSession implements IGameSession {
+    - IGame game
+    - ILevel level
+    - IScore score
+    - IQuestionGenerator questionGenerator
+    - IQuestionStorageSession questionStorage
+    - StateGameSessionEnum state
+    + AbstractGameSession(IGame game)
+    + void start()
+    + void pause()
+    + void end()
+    + ILevel level()
+    + IScore score()
+    + StateGameSessionEnum state()
+    + IQuestion nextQuestion()
+    + void submitAnswer(IPlayerAnswer answer)
+    # abstract ILevel createLevel()
+    # abstract IScore createScore()
+    # abstract IQuestionStorageSession createQuestionStorageSession()
+    # abstract IQuestionGenerator createQuestionGenerator()
+    # void onCorrectAnswer()
+    # void onIncorrectAnswer()
+}
+
+class CorrectAnswer implements ICorrectAnswer {
+    - String answerText
+    + CorrectAnswer(String answerText)
+    + String answer()
+}
+
+class DifficultyStrategy implements IDifficultyStrategy {
+    - ILevel level
+    + DifficultyStrategy(ILevel level)
+    + void init(ILevel level)
+    + void update(ILevel level)
+    + IQuestion generateQuestion()
+}
+
+class Game extends AbstractGame {
+    + Game(String name)
+    # IGameSession createGameSession()
+}
+
+class GameSession extends AbstractGameSession {
+    + GameSession(IGame game)
+    # ILevel createLevel()
+    # IScore createScore()
+    # IQuestionStorageSession createQuestionStorageSession()
+    # IQuestionGenerator createQuestionGenerator()
+    # void onCorrectAnswer()
+    # void onIncorrectAnswer()
+}
+
+class Level implements ILevel {
+    - int currentLevel
+    + void init()
+    + int level()
+    + void levelUp()
+    + void levelDown()
+}
+
+class PlayerAnswer implements IPlayerAnswer {
+    - String answerText
+    + PlayerAnswer(String answerText)
+    + String answer()
+}
+
+class Question implements IQuestion {
+    - String questionText
+    - ICorrectAnswer correctAnswer
+    + Question(String questionText, ICorrectAnswer correctAnswer)
+    + String question()
+    + ICorrectAnswer correctAnswer()
+}
+
+class QuestionGenerator implements IQuestionGenerator {
+    - IDifficultyStrategy difficultyStrategy
+    + QuestionGenerator(IDifficultyStrategy difficultyStrategy)
+    + IQuestion generateQuestion()
+}
+
+class QuestionStorageSession implements IQuestionStorageSession {
+    - List<IQuestion> questions
+    - List<ICorrectAnswer> correctAnswers
+    - List<IPlayerAnswer> playerAnswers
+    - IScore score
+    + QuestionStorageSession()
+    + IQuestion lastQuestion()
+    + List<IQuestion> questions()
+    + List<ICorrectAnswer> correctAnswers()
+    + List<IPlayerAnswer> playerAnswers()
+    + IScore score()
+    + void addQuestion(IQuestion question)
+    + void addPlayerAnswer(IPlayerAnswer answer)
+}
+
+class Score implements IScore {
+    - int scoreValue
+    + Score()
+    + int score()
+    + void incrementScore(int value)
+}
+
+class SessionAlreadyExistsException extends RuntimeException {
+    + SessionAlreadyExistsException(String message)
+}
+}
 @enduml
