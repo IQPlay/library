@@ -1,0 +1,30 @@
+# Nom du projet
+PROJECT_NAME           = "IQPlayLib"
+PROJECT_NUMBER         = "0.2"
+
+# Dossier source à scanner
+INPUT                  = lib/src/main/
+FILE_PATTERNS          = *.java
+
+# Générer de la documentation en HTML et XML
+GENERATE_HTML          = YES
+GENERATE_XML           = YES
+
+# Répertoires de sortie pour la documentation HTML et XML
+HTML_OUTPUT            = doxygen/html
+XML_OUTPUT             = doxygen/xml
+
+# Activer la recherche récursive dans le dossier source
+RECURSIVE              = YES
+
+# Options pour les JavaDoc (si tu utilises un format de commentaire spécifique à Java)
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
+
+# Autres configurations optionnelles que tu peux personnaliser
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES

@@ -1,16 +1,111 @@
-= IQPlayLib
-
 :plantuml:
+
+= IQPlayLib Documentation
 
 == IQP
 
-==  Team
+IQPlayLib est une bibliothèque Java qui facilite l'intégration de jeux de quiz dans des applications. Elle offre une architecture flexible pour créer des jeux de quiz personnalisés avec des niveaux de difficulté, des sessions de jeu, et la gestion des scores.
+
+== Équipe
+
 - Sami Letellier
 - Mathieu Baleydier
 - Changkai Wang
 
-== Application Goal
-adfda adfdaf
+== Objectif de la librairie
 
-== Architecture (diagramme de classe)
-plantuml::src/docs//models/diagrams/architecture.puml[svg]
+IQPlayLib vise à simplifier le développement de jeux de quiz en fournissant une infrastructure gérant les questions, réponses, niveaux de difficulté, sessions de jeu et scores. Elle est conçue pour être extensible, permettant la personnalisation des stratégies de difficulté, types de questions, et gestion des sessions.
+
+== Comment installer ?
+
+=== Prérequis
+
+Testé avec Gradle 8.10.2 et Java 21.0.4.
+
+=== Étapes d'installation
+#
+*Ajoutez le dépôt Maven* :
+
+Dans votre fichier `build.gradle`, ajoutez le dépôt GitHub Packages :
+
+[source,gradle]
+----
+repositories {
+   mavenCentral()
+   maven {
+       url = uri("https://maven.pkg.github.com/IQPlay/library/")
+       credentials {
+           username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+           password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+       }
+   }
+}
+----
+
+
+*Remarque* : GitHub Packages nécessite une authentification pour télécharger des dépendances, même si le dépôt est public. Assurez-vous de configurer vos identifiants comme décrit dans les étapes suivantes.
+
+#
+*Ajoutez la dépendance* :
+
+Toujours dans votre `build.gradle`, ajoutez la dépendance à IQPlayLib :
+
+[source,gradle]
+----
+dependencies {
+   implementation 'fr.parisnanterre:iqplaylib:{version}' // Remplacez par la dernière version disponible
+}
+----
+
+#
+*Configurez vos identifiants GitHub* :
+
+Si le dépôt nécessite une authentification, ajoutez vos identifiants GitHub dans un fichier `gradle.properties` situé dans votre répertoire utilisateur `~/.gradle/gradle.properties` :
+
+[source,text]
+----
+gpr.user=VotreNomUtilisateurGitHub gpr.key=VotreTokenGitHub
+----
+
+
+*Remarque* : Assurez-vous que votre token GitHub a les permissions nécessaires pour accéder aux packages (`read:packages`).
+
+#
+*Synchronisez votre projet* :
+
+Exécutez la commande suivante pour télécharger les dépendances :
+
+[source,bash]
+----
+./gradlew clean build
+----
+
+== Exemples d'utilisation
+
+=== Création d'un jeu personnalisé
+
+[source,java]
+----
+public class CustomGame extends AbstractGame {
+
+ public CustomGame(String name) {
+     super(name);
+ }
+
+ @Override
+ protected IGameSession createGameSession() {
+     return new CustomGameSession(this);
+ }
+}
+----
+
+---
+== Architecture
+
+L'architecture d'IQPlayLib est basée sur plusieurs interfaces, classes abstraites et concrètes, qui définissent les composants essentiels d'un jeu de quiz. Les développeurs peuvent étendre ces interfaces et classes pour personnaliser le comportement de leur jeu.
+
+plantuml::src/docs/models/diagrams/architecture.puml[svg]
+
+Diagramme de classes un peu moins condensée :
+
+plantuml::src/docs/models/diagrams/architecturev2.puml[svg]
