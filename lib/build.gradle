@@ -87,14 +87,14 @@ test {
 }
 
 
-group="fr.parisnanterre"
-version="0.0.1"
+group = 'fr.parisnanterre'
+version = '1.0.0-SNAPSHOT'
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            groupId = 'com.iqplay'
+            groupId = 'fr.parisnanterre'
             artifactId = 'iqplaylib'
             version = '1.0.0-SNAPSHOT' // SNAPSHOT pour les versions en développement
         }
