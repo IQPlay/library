@@ -104,8 +104,8 @@ public class CustomGame extends AbstractGame {
 
 L'architecture d'IQPlayLib est basée sur plusieurs interfaces, classes abstraites et concrètes, qui définissent les composants essentiels d'un jeu de quiz. Les développeurs peuvent étendre ces interfaces et classes pour personnaliser le comportement de leur jeu.
 
-plantuml::models/diagrams/architecture.puml[svg]
+plantuml::src/docs/models/diagrams/architecture.puml[svg]
 
 Diagramme de classes un peu moins condensée :
 
-plantuml::models/diagrams/architecturev2.puml[svg]
+plantuml::src/docs/models/diagrams/architecturev2.puml[svg]
