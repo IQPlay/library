@@ -14,4 +14,5 @@ public interface IQuestionStorageSession {
     IScore score();
     void addQuestion(IQuestion question);
     void addPlayerAnswer(IPlayerAnswer answer);
+    IPlayerAnswer lastPlayerAnswer();
 }
