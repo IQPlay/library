@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib.core;
+package fr.parisnanterre.iqplaylib.core;
 
-import fr.parisNanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.api.*;
 
 import java.util.ArrayList;
 import java.util.List;

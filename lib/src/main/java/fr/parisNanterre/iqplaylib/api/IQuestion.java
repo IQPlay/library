@@ -1,4 +1,4 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
 /**
  * IQuestion is an interface representing a question in a question-answer system.

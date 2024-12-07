@@ -1,4 +1,4 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
 /**
  * The ILevel interface defines the methods required to manage and manipulate levels

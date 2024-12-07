@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib.core;
+package fr.parisnanterre.iqplaylib.core;
 
-import fr.parisNanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.api.*;
 
 /**
  * GameSession is a concrete implementation of AbstractGameSession, designed to manage the lifecycle,

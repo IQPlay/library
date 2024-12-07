@@ -1,4 +1,4 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
 /**
  * Represents a general answer within the system.

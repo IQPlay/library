@@ -1,4 +1,4 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
 /**
  * Represents an answer provided by a player within a game session.

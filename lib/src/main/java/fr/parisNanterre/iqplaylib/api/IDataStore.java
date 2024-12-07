@@ -1,4 +1,4 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
 import java.util.Optional;
 

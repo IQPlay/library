@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib.core;
+package fr.parisnanterre.iqplaylib.core;
 
-import fr.parisNanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.api.*;
 
 /**
  * The Score class implements the IScore interface and provides functionality

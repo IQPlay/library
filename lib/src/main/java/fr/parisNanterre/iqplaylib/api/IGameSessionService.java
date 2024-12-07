@@ -1,4 +1,4 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
 public interface IGameSessionService {
     IGameSession createSession(IPlayer player, IGame game);

@@ -1,7 +1,7 @@
-package fr.parisNanterre.iqplaylib.core;
+package fr.parisnanterre.iqplaylib.core;
 
-import fr.parisNanterre.iqplaylib.api.*;
-import fr.parisNanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
+import fr.parisnanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
 
 /**
  * AbstractGame is an abstract class that implements the IGame interface.
@@ -13,7 +13,7 @@ public abstract class AbstractGame implements IGame {
     private String name;
     private IGameSession currentSession;
 
-    public AbstractGame(String name) {
+    AbstractGame(String name) {
         this.name = name;
     }
 

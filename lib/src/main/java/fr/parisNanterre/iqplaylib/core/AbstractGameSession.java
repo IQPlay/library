@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib.core;
+package fr.parisnanterre.iqplaylib.core;
 
-import fr.parisNanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.api.*;
 
 /**
  * Abstract class that defines the blueprint for a game session.
@@ -14,7 +14,7 @@ public abstract class AbstractGameSession implements IGameSession {
     protected IQuestionStorageSession questionStorage;
     protected StateGameSessionEnum state;
 
-    public AbstractGameSession(IGame game) {
+    AbstractGameSession(IGame game) {
         this.game = game;
         this.level = createLevel();
         this.score = createScore();

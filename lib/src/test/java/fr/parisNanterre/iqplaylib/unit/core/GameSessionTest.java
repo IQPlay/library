@@ -1,8 +1,8 @@
-package fr.parisNanterre.iqplaylib.unit.core;
+package fr.parisnanterre.iqplaylib.unit.core;
 
-import fr.parisNanterre.iqplaylib.api.*;
-import fr.parisNanterre.iqplaylib.core.Game;
-import fr.parisNanterre.iqplaylib.core.PlayerAnswer;
+import fr.parisnanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.core.Game;
+import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

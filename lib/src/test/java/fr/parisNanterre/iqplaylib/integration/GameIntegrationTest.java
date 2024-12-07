@@ -1,13 +1,13 @@
-package fr.parisNanterre.iqplaylib.integration;
+package fr.parisnanterre.iqplaylib.integration;
 
-import fr.parisNanterre.iqplaylib.api.*;
-import fr.parisNanterre.iqplaylib.core.*;
-import fr.parisNanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
+import fr.parisnanterre.iqplaylib.api.*;
+import fr.parisnanterre.iqplaylib.core.*;
+import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameIntegrationTest {
+class GameIntegrationTest {
 
     @Test
     void testCompleteGameFlow() throws SessionAlreadyExistsException {

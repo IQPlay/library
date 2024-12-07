@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib.api;
+package fr.parisnanterre.iqplaylib.api;
 
-import fr.parisNanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
+import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
 
 /**
  * Interface representing a game.
