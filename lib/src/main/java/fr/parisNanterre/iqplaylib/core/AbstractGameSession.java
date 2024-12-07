@@ -14,7 +14,7 @@ public abstract class AbstractGameSession implements IGameSession {
     protected IQuestionStorageSession questionStorage;
     protected StateGameSessionEnum state;
 
-    AbstractGameSession(IGame game) {
+    protected AbstractGameSession(IGame game) {
         this.game = game;
         this.level = createLevel();
         this.score = createScore();

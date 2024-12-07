@@ -13,7 +13,7 @@ public abstract class AbstractGame implements IGame {
     private String name;
     private IGameSession currentSession;
 
-    AbstractGame(String name) {
+    protected AbstractGame(String name) {
         this.name = name;
     }
 
