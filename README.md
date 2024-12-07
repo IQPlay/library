@@ -37,7 +37,20 @@ In your `build.gradle`, add the dependency for [IQPlayLib](https://github.com/IQ
 
 ```gradle
 dependencies {
-    implementation 'fr.parisnanterre:iqplaylib:{version}' // Replace {version} with the latest available version
+    implementation 'fr.parisnanterre:iqplaylib:0.2'
+}
+```
+
+```gradle
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/IQPlay/library/")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+        }
+    }
 }
 ```
 
@@ -67,3 +80,7 @@ public class CustomGame extends AbstractGame {
 }
 ```
 
+## Youtube overview
+<a href="https://youtu.be/kt18qsJTzoQ">
+  <img src="https://i.ibb.co/hyLmY7T/Capture-d-cran-2024-11-08-20-39-30.png" width="200" />
+</a>
