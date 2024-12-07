@@ -61,6 +61,10 @@ public class QuestionStorageSession implements IQuestionStorageSession {
 
     @Override
     public IPlayerAnswer lastPlayerAnswer() {
-        return null;
+        if (playerAnswers.isEmpty()) {
+            return null;
+        }
+        return playerAnswers.getLast();
     }
+
 }
