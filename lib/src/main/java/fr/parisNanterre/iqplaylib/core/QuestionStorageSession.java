@@ -58,4 +58,9 @@ public class QuestionStorageSession implements IQuestionStorageSession {
     public void addPlayerAnswer(IPlayerAnswer answer) {
         playerAnswers.add(answer);
     }
+
+    @Override
+    public IPlayerAnswer lastPlayerAnswer() {
+        return null;
+    }
 }
