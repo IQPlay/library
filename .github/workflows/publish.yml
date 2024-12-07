@@ -28,8 +28,11 @@ jobs:
           server-password: GITHUB_TOKEN
           settings-path: ${{ github.workspace }}
 
+      - name: Set unique version
+        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+
       - name: Publish to GitHub Packages
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew publish
+        run: ./gradlew publish -PbuildNumber=${{ github.run_number }}

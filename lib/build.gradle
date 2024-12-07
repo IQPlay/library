@@ -83,7 +83,8 @@ test {
 
 
 group = 'fr.parisnanterre'
-version = '0.2-SNAPSHOT'
+def buildNumber = project.findProperty('buildNumber') ?: 'local'
+version = "0.2-SNAPSHOT-${buildNumber}"
 
 publishing {
     publications {
