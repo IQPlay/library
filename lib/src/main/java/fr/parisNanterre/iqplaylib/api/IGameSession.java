@@ -12,4 +12,5 @@ public interface IGameSession {
     StateGameSessionEnum state();
     IQuestion nextQuestion();
     void submitAnswer(IPlayerAnswer answer);
+    IQuestionStorageSession questionStorage();
 }

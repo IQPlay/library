@@ -43,4 +43,9 @@ public class GameSession extends AbstractGameSession {
         // Logique supplémentaire en cas de mauvaise réponse
         super.onIncorrectAnswer(); // Appelle end() par défaut
     }
+
+    @Override
+    public IQuestionStorageSession questionStorage() {
+        return null;
+    }
 }
