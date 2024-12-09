@@ -3,6 +3,7 @@ package fr.parisnanterre.iqplaylib.unit.core;
 import fr.parisnanterre.iqplaylib.api.*;
 import fr.parisnanterre.iqplaylib.core.Game;
 import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
+import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class GameSessionTest {
     private IGameSession gameSession;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws SessionAlreadyExistsException {
         IGame game = new Game("Test Game");
         gameSession = game.createSession();
     }
@@ -29,6 +30,15 @@ class GameSessionTest {
         gameSession.start();
         IQuestion question = gameSession.nextQuestion();
         assertNotNull(question, "La question ne doit pas être nulle");
+    }
+
+    @Test
+    void testNextQuestionBeforeStart() {
+        // Selon le comportement attendu, ceci peut soit renvoyer une question soit nécessiter un test d'exception.
+        // Ici, on s'attend à ce que la question soit générée même avant start, mais si ce n'est pas logique,
+        // ajouter une assertion différente.
+        IQuestion question = gameSession.nextQuestion();
+        assertNotNull(question, "Même avant start, une question est générée. Vérifier la logique si besoin.");
     }
 
     @Test
@@ -50,5 +60,23 @@ class GameSessionTest {
         gameSession.submitAnswer(playerAnswer);
 
         assertEquals(StateGameSessionEnum.ENDED, gameSession.state(), "La session doit être terminée");
+    }
+
+    @Test
+    void testSessionPause() {
+        gameSession.start();
+        gameSession.pause();
+        assertEquals(StateGameSessionEnum.PAUSED, gameSession.state(), "La session doit être en pause");
+    }
+
+    @Test
+    void testSessionEndAfterCorrectAnswer() {
+        // Test explicite pour onCorrectAnswer() déjà indirectement couvert, mais on insiste.
+        gameSession.start();
+        IQuestion question = gameSession.nextQuestion();
+        IPlayerAnswer correct = new PlayerAnswer(question.correctAnswer().answer());
+        gameSession.submitAnswer(correct);
+        // On vérifie l'effet post soumission d'une bonne réponse (score et level déjà testés)
+        assertEquals(StateGameSessionEnum.STARTED, gameSession.state(), "La session ne doit pas se terminer après une bonne réponse");
     }
 }

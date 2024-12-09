@@ -40,4 +40,11 @@ class LevelTest {
         level.levelDown();
         assertEquals(1, level.level(), "Le niveau ne doit pas descendre en dessous de 1");
     }
+
+    @Test
+    void testMultipleLevelDownAtMinimum() {
+        level.levelDown();
+        level.levelDown();
+        assertEquals(1, level.level(), "Le niveau doit rester à 1 malgré plusieurs levelDown");
+    }
 }
