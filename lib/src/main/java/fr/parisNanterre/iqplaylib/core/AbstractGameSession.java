@@ -14,10 +14,8 @@ public abstract class AbstractGameSession implements IGameSession {
     protected IQuestionStorageSession questionStorage;
     protected StateGameSessionEnum state;
 
-    protected AbstractGameSession(IGame game, ILevel level, IScore score) {
+    protected AbstractGameSession(IGame game) {
         this.game = game;
-        this.level = level;
-        this.score = score;
         this.questionStorage = createQuestionStorageSession();
         this.questionGenerator = createQuestionGenerator();
         this.state = StateGameSessionEnum.CREATED;
@@ -27,9 +25,10 @@ public abstract class AbstractGameSession implements IGameSession {
     protected abstract IQuestionGenerator createQuestionGenerator();
 
     @Override
-    public void start() {
+    public void start(ILevel level, IScore score) {
         this.state = StateGameSessionEnum.STARTED;
-        level.init();
+        this.level = level;
+        this.score = score;
     }
 
     @Override

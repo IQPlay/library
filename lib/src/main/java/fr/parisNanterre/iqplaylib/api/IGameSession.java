@@ -4,7 +4,7 @@ package fr.parisnanterre.iqplaylib.api;
  * Represents a game session, providing control over the session's lifecycle and interactions within it.
  */
 public interface IGameSession {
-    void start();
+    void start(ILevel level, IScore score);
     void pause();
     void end();
     ILevel level();

@@ -1,5 +1,7 @@
 package fr.parisnanterre.iqplaylib.unit.core;
 
+import fr.parisnanterre.iqplaylib.Level;
+import fr.parisnanterre.iqplaylib.Score;
 import fr.parisnanterre.iqplaylib.api.*;
 import fr.parisnanterre.iqplaylib.core.Game;
 import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
@@ -21,13 +23,17 @@ class GameSessionTest {
 
     @Test
     void testSessionStart() {
-        gameSession.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        gameSession.start(level, score);
         assertEquals(StateGameSessionEnum.STARTED, gameSession.state(), "La session doit être démarrée");
     }
 
     @Test
     void testNextQuestion() {
-        gameSession.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        gameSession.start(level, score);
         IQuestion question = gameSession.nextQuestion();
         assertNotNull(question, "La question ne doit pas être nulle");
     }
@@ -43,7 +49,9 @@ class GameSessionTest {
 
     @Test
     void testSubmitCorrectAnswer() {
-        gameSession.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        gameSession.start(level, score);
         IQuestion question = gameSession.nextQuestion();
         IPlayerAnswer playerAnswer = new PlayerAnswer(question.correctAnswer().answer());
         gameSession.submitAnswer(playerAnswer);
@@ -54,7 +62,9 @@ class GameSessionTest {
 
     @Test
     void testSubmitIncorrectAnswer() {
-        gameSession.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        gameSession.start(level, score);
         gameSession.nextQuestion();
         IPlayerAnswer playerAnswer = new PlayerAnswer("Mauvaise Réponse");
         gameSession.submitAnswer(playerAnswer);
@@ -64,7 +74,9 @@ class GameSessionTest {
 
     @Test
     void testSessionPause() {
-        gameSession.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        gameSession.start(level, score);
         gameSession.pause();
         assertEquals(StateGameSessionEnum.PAUSED, gameSession.state(), "La session doit être en pause");
     }
@@ -72,11 +84,14 @@ class GameSessionTest {
     @Test
     void testSessionEndAfterCorrectAnswer() {
         // Test explicite pour onCorrectAnswer() déjà indirectement couvert, mais on insiste.
-        gameSession.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        gameSession.start(level, score);
         IQuestion question = gameSession.nextQuestion();
         IPlayerAnswer correct = new PlayerAnswer(question.correctAnswer().answer());
         gameSession.submitAnswer(correct);
         // On vérifie l'effet post soumission d'une bonne réponse (score et level déjà testés)
         assertEquals(StateGameSessionEnum.STARTED, gameSession.state(), "La session ne doit pas se terminer après une bonne réponse");
     }
+
 }

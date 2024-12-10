@@ -1,7 +1,7 @@
 package fr.parisnanterre.iqplaylib.unit.core;
 
+import fr.parisnanterre.iqplaylib.Score;
 import fr.parisnanterre.iqplaylib.api.IScore;
-import fr.parisnanterre.iqplaylib.core.Score;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class ScoreTest {
 
     @BeforeEach
     void setUp() {
-        score = new Score();
+        score = new Score(1);
     }
 
     @Test

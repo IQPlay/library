@@ -1,8 +1,8 @@
 package fr.parisnanterre.iqplaylib.unit.core;
 
+import fr.parisnanterre.iqplaylib.Level;
 import fr.parisnanterre.iqplaylib.api.*;
 import fr.parisnanterre.iqplaylib.core.DifficultyStrategy;
-import fr.parisnanterre.iqplaylib.core.Level;
 import fr.parisnanterre.iqplaylib.core.QuestionGenerator;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +12,7 @@ class QuestionGeneratorTest {
 
     @Test
     void testGenerateQuestion() {
-        ILevel level = new Level();
-        level.init();
+        ILevel level = new Level(1);
 
         IDifficultyStrategy difficultyStrategy = new DifficultyStrategy(level);
         IQuestionGenerator questionGenerator = new QuestionGenerator(difficultyStrategy);
