@@ -1,5 +1,7 @@
 package fr.parisnanterre.iqplaylib.integration;
 
+import fr.parisnanterre.iqplaylib.Level;
+import fr.parisnanterre.iqplaylib.Score;
 import fr.parisnanterre.iqplaylib.api.*;
 import fr.parisnanterre.iqplaylib.core.Game;
 import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
@@ -14,7 +16,9 @@ class GameIntegrationTest {
     void testCompleteGameFlow() throws SessionAlreadyExistsException {
         IGame game = new Game("Test Game");
         IGameSession session = game.createSession();
-        session.start();
+        ILevel level = new Level(1);
+        IScore score = new Score(1);
+        session.start(level, score);
 
         int maxIterations = 10;
         int iterations = 0;
