@@ -6,12 +6,11 @@ import fr.parisnanterre.iqplaylib.api.*;
  * This class represents a level management system implementing the ILevel interface.
  * It allows initialization and adjustment of the current level up or down, with a minimum level of 1.
  */
-public class Level implements ILevel {
-    private int currentLevel;
+public abstract class AbstractLevel implements ILevel {
+    protected int currentLevel;
 
-    @Override
-    public void init() {
-        this.currentLevel = 1;
+    public AbstractLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
     }
 
     @Override

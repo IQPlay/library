@@ -9,18 +9,8 @@ import fr.parisnanterre.iqplaylib.api.*;
  */
 public class GameSession extends AbstractGameSession {
 
-    public GameSession(IGame game) {
-        super(game);
-    }
-
-    @Override
-    protected ILevel createLevel() {
-        return new Level();
-    }
-
-    @Override
-    protected IScore createScore() {
-        return new Score();
+    public GameSession(IGame game, ILevel level, IScore score) {
+        super(game, level, score);
     }
 
     @Override
