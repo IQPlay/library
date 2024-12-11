@@ -12,7 +12,7 @@ class QuestionGeneratorTest {
 
     @Test
     void testGenerateQuestion() {
-        ILevel level = new Level(1);
+        ILevel level = new Level();
 
         IDifficultyStrategy difficultyStrategy = new DifficultyStrategy(level);
         IQuestionGenerator questionGenerator = new QuestionGenerator(difficultyStrategy);

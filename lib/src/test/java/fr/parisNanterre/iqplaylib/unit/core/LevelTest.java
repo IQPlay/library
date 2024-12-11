@@ -13,7 +13,7 @@ class LevelTest {
 
     @BeforeEach
     void setUp() {
-        level = new Level(1);
+        level = new Level();
     }
 
     @Test

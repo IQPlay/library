@@ -13,7 +13,7 @@ class DifficultyStrategyTest {
 
     @Test
     void testInitAndGenerateQuestion() {
-        ILevel level = new Level(1);
+        ILevel level = new Level();
         IDifficultyStrategy strategy = new DifficultyStrategy(level);
         IQuestion question = strategy.generateQuestion();
         assertTrue(question.question().contains("niveau 1"), "La question doit refléter le niveau initial");
@@ -21,7 +21,7 @@ class DifficultyStrategyTest {
 
     @Test
     void testUpdateDifficultyStrategy() {
-        ILevel level = new Level(1);
+        ILevel level = new Level();
         IDifficultyStrategy strategy = new DifficultyStrategy(level);
 
         // Simuler une montée de niveau

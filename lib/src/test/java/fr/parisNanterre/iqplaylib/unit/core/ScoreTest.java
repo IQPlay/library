@@ -13,7 +13,7 @@ class ScoreTest {
 
     @BeforeEach
     void setUp() {
-        score = new Score(1);
+        score = new Score();
     }
 
     @Test
@@ -43,8 +43,6 @@ class ScoreTest {
     @Test
     void testScoreWithNegativeIncrement() {
         score.incrementScore(-2);
-        // Selon la logique métier, on peut décider que le score ne doit pas être négatif.
-        // Ici, on laisse tel quel, mais un test permet de le mettre en évidence.
-        assertEquals(-2, score.score(), "Le score peut devenir négatif si le code actuel le permet. Vérifier la logique métier.");
+        assertEquals(-2, score.score(), "Le score peut devenir négatif si le code actuel le permet.");
     }
 }

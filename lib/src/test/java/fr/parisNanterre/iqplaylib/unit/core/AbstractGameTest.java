@@ -57,8 +57,8 @@ class AbstractGameTest {
     void testCreateMultipleSessionsFromAbstractGame() throws SessionAlreadyExistsException {
         IGame game = new TestGame("Abstract Test Game");
         IGameSession session1 = game.createSession();
-        ILevel level = new Level(1);
-        IScore score = new Score(1);
+        ILevel level = new Level();
+        IScore score = new Score();
         session1.start(level, score);
         assertThrows(SessionAlreadyExistsException.class, () -> game.createSession());
     }

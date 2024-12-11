@@ -6,25 +6,35 @@ import fr.parisnanterre.iqplaylib.api.*;
 import fr.parisnanterre.iqplaylib.core.Game;
 import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
 import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameIntegrationTest {
 
+    private IGame game;
+    private IGameSession session;
+    private ILevel level;
+    private IScore score;
+
+    @BeforeEach
+    void setUp() throws SessionAlreadyExistsException {
+        game = new Game("Test Game");
+        session = game.createSession();
+        level = new Level(); // Initialisation du niveau
+        score = new Score(); // Initialisation du score
+        session.start(level, score);
+    }
+
     @Test
     void testCompleteGameFlow() throws SessionAlreadyExistsException {
-        IGame game = new Game("Test Game");
-        IGameSession session = game.createSession();
-        ILevel level = new Level(1);
-        IScore score = new Score(1);
-        session.start(level, score);
-
         int maxIterations = 10;
         int iterations = 0;
 
         while (session.state() == StateGameSessionEnum.STARTED && iterations < maxIterations) {
             IQuestion question = session.nextQuestion();
+            assertNotNull(question, "La question générée ne doit pas être nulle");
             IPlayerAnswer playerAnswer = new PlayerAnswer(question.correctAnswer().answer());
             session.submitAnswer(playerAnswer);
             iterations++;
