@@ -1,7 +1,7 @@
-package fr.parisNanterre.iqplaylib.unit.core;
+package fr.parisnanterre.iqplaylib.unit.core;
 
-import fr.parisNanterre.iqplaylib.Score;
-import fr.parisNanterre.iqplaylib.api.IScore;
+import fr.parisnanterre.iqplaylib.Score;
+import fr.parisnanterre.iqplaylib.api.IScore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

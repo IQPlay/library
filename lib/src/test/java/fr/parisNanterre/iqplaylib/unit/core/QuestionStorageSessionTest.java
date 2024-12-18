@@ -1,12 +1,14 @@
-package fr.parisNanterre.iqplaylib.unit.core;
+package fr.parisnanterre.iqplaylib.unit.core;
 
 import fr.parisnanterre.iqplaylib.api.*;
-import fr.parisNanterre.iqplaylib.core.CorrectAnswer;
-import fr.parisNanterre.iqplaylib.core.PlayerAnswer;
-import fr.parisNanterre.iqplaylib.core.Question;
-import fr.parisNanterre.iqplaylib.core.QuestionStorageSession;
+import fr.parisnanterre.iqplaylib.core.CorrectAnswer;
+import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
+import fr.parisnanterre.iqplaylib.core.Question;
+import fr.parisnanterre.iqplaylib.core.QuestionStorageSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class QuestionStorageSessionTest {
 

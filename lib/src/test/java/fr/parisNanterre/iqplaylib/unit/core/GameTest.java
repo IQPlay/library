@@ -1,9 +1,9 @@
-package fr.parisNanterre.iqplaylib.unit.core;
+package fr.parisnanterre.iqplaylib.unit.core;
 
-import fr.parisNanterre.iqplaylib.api.IGame;
-import fr.parisNanterre.iqplaylib.api.IGameSession;
-import fr.parisNanterre.iqplaylib.core.Game;
-import fr.parisNanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
+import fr.parisnanterre.iqplaylib.api.IGame;
+import fr.parisnanterre.iqplaylib.api.IGameSession;
+import fr.parisnanterre.iqplaylib.core.Game;
+import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

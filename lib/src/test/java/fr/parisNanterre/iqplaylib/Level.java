@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib;
+package fr.parisnanterre.iqplaylib;
 
-import fr.parisNanterre.iqplaylib.core.AbstractLevel;
+import fr.parisnanterre.iqplaylib.core.AbstractLevel;
 
 public class Level extends AbstractLevel {
     public Level() {

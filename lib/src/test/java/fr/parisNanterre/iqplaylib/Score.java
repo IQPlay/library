@@ -1,6 +1,6 @@
-package fr.parisNanterre.iqplaylib;
+package fr.parisnanterre.iqplaylib;
 
-import fr.parisNanterre.iqplaylib.core.AbstractScore;
+import fr.parisnanterre.iqplaylib.core.AbstractScore;
 
 public class Score extends AbstractScore {
 

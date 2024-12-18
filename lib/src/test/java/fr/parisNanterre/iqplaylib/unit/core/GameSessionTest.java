@@ -1,11 +1,11 @@
-package fr.parisNanterre.iqplaylib.unit.core;
+package fr.parisnanterre.iqplaylib.unit.core;
 
-import fr.parisNanterre.iqplaylib.Score;
+import fr.parisnanterre.iqplaylib.Score;
 import fr.parisnanterre.iqplaylib.api.*;
-import fr.parisNanterre.iqplaylib.core.Game;
-import fr.parisNanterre.iqplaylib.core.Level;
-import fr.parisNanterre.iqplaylib.core.PlayerAnswer;
-import fr.parisNanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
+import fr.parisnanterre.iqplaylib.core.Game;
+import fr.parisnanterre.iqplaylib.core.Level;
+import fr.parisnanterre.iqplaylib.core.PlayerAnswer;
+import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

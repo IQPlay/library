@@ -1,10 +1,10 @@
-package fr.parisNanterre.iqplaylib.unit.core;
+package fr.parisnanterre.iqplaylib.unit.core;
 
-import fr.parisNanterre.iqplaylib.Level;
-import fr.parisNanterre.iqplaylib.api.IDifficultyStrategy;
-import fr.parisNanterre.iqplaylib.api.ILevel;
-import fr.parisNanterre.iqplaylib.api.IQuestion;
-import fr.parisNanterre.iqplaylib.core.DifficultyStrategy;
+import fr.parisnanterre.iqplaylib.Level;
+import fr.parisnanterre.iqplaylib.api.IDifficultyStrategy;
+import fr.parisnanterre.iqplaylib.api.ILevel;
+import fr.parisnanterre.iqplaylib.api.IQuestion;
+import fr.parisnanterre.iqplaylib.core.DifficultyStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
