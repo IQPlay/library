@@ -1,0 +1,16 @@
+@startuml
+
+title Gestion des niveaux : Changement de niveau
+
+participant ILevel
+
+actor Système
+Système -> ILevel : levelUp()
+ILevel -> ILevel : Incrémentation du niveau
+return Nouveau niveau
+
+Système -> ILevel : levelDown()
+ILevel -> ILevel : Décrémentation si niveau > 1
+return Niveau actuel
+
+@enduml

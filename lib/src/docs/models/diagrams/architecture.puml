@@ -19,7 +19,7 @@ interface IGame {
 }
 
 interface IGameSession {
-    + void start()
+    + void start(ILevel level, IScore score)
     + void pause()
     + void end()
     + ILevel level()
@@ -27,10 +27,10 @@ interface IGameSession {
     + StateGameSessionEnum state()
     + IQuestion nextQuestion()
     + void submitAnswer(IPlayerAnswer answer)
+    + IQuestionStorageSession questionStorage()
 }
 
 interface ILevel {
-    + void init()
     + int level()
     + void levelUp()
     + void levelDown()
@@ -52,7 +52,7 @@ interface IQuestionStorageSession {
     + List<IQuestion> questions()
     + List<ICorrectAnswer> correctAnswers()
     + List<IPlayerAnswer> playerAnswers()
-    + IScore score()
+    + IPlayerAnswer lastPlayerAnswer()
     + void addQuestion(IQuestion question)
     + void addPlayerAnswer(IPlayerAnswer answer)
 }
@@ -86,7 +86,7 @@ abstract class AbstractGameSession implements IGameSession {
     - IQuestionStorageSession questionStorage
     - StateGameSessionEnum state
     + AbstractGameSession(IGame game)
-    + void start()
+    + void start(ILevel level, IScore score)
     + void pause()
     + void end()
     + ILevel level()
@@ -94,8 +94,6 @@ abstract class AbstractGameSession implements IGameSession {
     + StateGameSessionEnum state()
     + IQuestion nextQuestion()
     + void submitAnswer(IPlayerAnswer answer)
-    # abstract ILevel createLevel()
-    # abstract IScore createScore()
     # abstract IQuestionStorageSession createQuestionStorageSession()
     # abstract IQuestionGenerator createQuestionGenerator()
     # void onCorrectAnswer()
@@ -123,8 +121,6 @@ class Game extends AbstractGame {
 
 class GameSession extends AbstractGameSession {
     + GameSession(IGame game)
-    # ILevel createLevel()
-    # IScore createScore()
     # IQuestionStorageSession createQuestionStorageSession()
     # IQuestionGenerator createQuestionGenerator()
     # void onCorrectAnswer()
@@ -133,7 +129,7 @@ class GameSession extends AbstractGameSession {
 
 class Level implements ILevel {
     - int currentLevel
-    + void init()
+    + Level(int initialLevel)
     + int level()
     + void levelUp()
     + void levelDown()
@@ -163,20 +159,19 @@ class QuestionStorageSession implements IQuestionStorageSession {
     - List<IQuestion> questions
     - List<ICorrectAnswer> correctAnswers
     - List<IPlayerAnswer> playerAnswers
-    - IScore score
     + QuestionStorageSession()
     + IQuestion lastQuestion()
     + List<IQuestion> questions()
     + List<ICorrectAnswer> correctAnswers()
     + List<IPlayerAnswer> playerAnswers()
-    + IScore score()
+    + IPlayerAnswer lastPlayerAnswer()
     + void addQuestion(IQuestion question)
     + void addPlayerAnswer(IPlayerAnswer answer)
 }
 
 class Score implements IScore {
     - int scoreValue
-    + Score()
+    + Score(int scoreValue)
     + int score()
     + void incrementScore(int value)
 }

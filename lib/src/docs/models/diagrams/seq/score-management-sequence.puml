@@ -1,0 +1,12 @@
+@startuml
+
+title Gestion des scores : Mise à jour des scores
+
+participant IScore
+
+actor Système
+Système -> IScore : incrementScore(valeur)
+IScore -> IScore : Ajout de la valeur au score actuel
+return Nouveau score
+
+@enduml
