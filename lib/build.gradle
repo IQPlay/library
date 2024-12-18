@@ -84,7 +84,8 @@ test {
 
 group = 'fr.parisnanterre'
 def buildNumber = project.findProperty('buildNumber') ?: 'local'
-version = "0.2-SNAPSHOT-${buildNumber}" // SNAPSHOT pour les versions en développement
+//version = "0.2-SNAPSHOT-${buildNumber}" // SNAPSHOT pour les versions en développement
+version = "0.3" // version officielle !
 
 publishing {
     publications {

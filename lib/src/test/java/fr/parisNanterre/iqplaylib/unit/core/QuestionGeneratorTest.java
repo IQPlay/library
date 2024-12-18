@@ -1,9 +1,9 @@
-package fr.parisnanterre.iqplaylib.unit.core;
+package fr.parisNanterre.iqplaylib.unit.core;
 
-import fr.parisnanterre.iqplaylib.Level;
+import fr.parisNanterre.iqplaylib.Level;
 import fr.parisnanterre.iqplaylib.api.*;
-import fr.parisnanterre.iqplaylib.core.DifficultyStrategy;
-import fr.parisnanterre.iqplaylib.core.QuestionGenerator;
+import fr.parisNanterre.iqplaylib.core.DifficultyStrategy;
+import fr.parisNanterre.iqplaylib.core.QuestionGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
