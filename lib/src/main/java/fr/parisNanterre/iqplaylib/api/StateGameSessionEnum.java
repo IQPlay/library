@@ -10,5 +10,6 @@ public enum StateGameSessionEnum {
     STARTED,
     PAUSED,
     ENDED,
-    INTERRUPTED
+    INTERRUPTED,
+    IN_PROGRESS,
 }
