@@ -14,24 +14,18 @@ public class GameSession extends AbstractGameSession {
     }
 
     @Override
-    protected ILevel createLevel() {
-        return new Level();
-    }
-
-    @Override
-    protected IScore createScore() {
-        return new Score();
-    }
-
-    @Override
     protected IQuestionStorageSession createQuestionStorageSession() {
         return new QuestionStorageSession();
     }
 
     @Override
     protected IQuestionGenerator createQuestionGenerator() {
+        if (level == null) {
+            level = new Level(1); // implémentation concrète avec un niveau par défaut (à changer plus tard)
+        }
         return new QuestionGenerator(new DifficultyStrategy(level));
     }
+
 
     @Override
     protected void onCorrectAnswer() {

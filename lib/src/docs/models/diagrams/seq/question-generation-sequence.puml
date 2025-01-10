@@ -1,0 +1,15 @@
+@startuml
+
+title Génération des questions : Création d'une question
+
+participant IQuestionGenerator
+participant IDifficultyStrategy
+participant IQuestion
+
+actor Système
+Système -> IQuestionGenerator : generateQuestion()
+IQuestionGenerator -> IDifficultyStrategy : generateQuestion()
+IDifficultyStrategy -> IQuestion : Instanciation de la question avec difficulté
+return Nouvelle question
+
+@enduml

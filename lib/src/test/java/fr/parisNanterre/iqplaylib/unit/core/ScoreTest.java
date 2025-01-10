@@ -1,7 +1,7 @@
 package fr.parisnanterre.iqplaylib.unit.core;
 
+import fr.parisnanterre.iqplaylib.Score;
 import fr.parisnanterre.iqplaylib.api.IScore;
-import fr.parisnanterre.iqplaylib.core.Score;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,8 +43,6 @@ class ScoreTest {
     @Test
     void testScoreWithNegativeIncrement() {
         score.incrementScore(-2);
-        // Selon la logique métier, on peut décider que le score ne doit pas être négatif.
-        // Ici, on laisse tel quel, mais un test permet de le mettre en évidence.
-        assertEquals(-2, score.score(), "Le score peut devenir négatif si le code actuel le permet. Vérifier la logique métier.");
+        assertEquals(-2, score.score(), "Le score peut devenir négatif si le code actuel le permet.");
     }
 }

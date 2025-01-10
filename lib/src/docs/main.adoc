@@ -2,19 +2,57 @@
 
 = IQPlayLib Documentation
 
-== IQP
+== Présentation
 
-IQPlayLib est une bibliothèque Java qui facilite l'intégration de jeux de quiz dans des applications. Elle offre une architecture flexible pour créer des jeux de quiz personnalisés avec des niveaux de difficulté, des sessions de jeu, et la gestion des scores.
+IQPlayLib est une bibliothèque Java permettant de créer facilement des jeux de quiz interactifs. Elle facilite la gestion des sessions de jeu, des niveaux de difficulté, des scores et des questions/réponses.
 
-== Équipe
+Elle vise à simplifier le développement en fournissant une infrastructure extensible pour la personnalisation des stratégies de difficulté, des types de questions et de la gestion des sessions.
 
+**Équipe :**
 - Sami Letellier
 - Mathieu Baleydier
-- Changkai Wang
 
-== Objectif de la librairie
+== Grande feature
 
-IQPlayLib vise à simplifier le développement de jeux de quiz en fournissant une infrastructure gérant les questions, réponses, niveaux de difficulté, sessions de jeu et scores. Elle est conçue pour être extensible, permettant la personnalisation des stratégies de difficulté, types de questions, et gestion des sessions.
+=== Gestion des sessions
+
+- **Nom :** Sessions de jeu
+- **Quoi :** Gestion complète des sessions avec des états comme "créé", "en cours", "en pause", "terminé".
+- **Wireframe + Explications :**
+Aucune interface utilisateur directe fournie (couche backend uniquement).
+- **Diagrammes de séquences systèmes :**
+
+plantuml::src/docs/models/diagrams/seq/session-management-sequence.puml[svg]
+
+=== Gestion des niveaux
+
+- **Nom :** Niveaux de jeu
+- **Quoi :** Permet de monter ou descendre en niveau en fonction des performances du joueur.
+- **Wireframe + Explications :**
+Gestion logique implémentée dans `AbstractLevel`.
+- **Diagrammes de séquences systèmes :**
+
+plantuml::src/docs/models/diagrams/seq/level-management-sequence.puml[svg]
+
+=== Gestion des scores
+
+- **Nom :** Système de score
+- **Quoi :** Incrémentation et gestion des scores des joueurs au fil de la session.
+- **Wireframe + Explications :**
+Implémentée dans `AbstractScore` et ses classes dérivées.
+- **Diagrammes de séquences systèmes :**
+
+plantuml::src/docs/models/diagrams/seq/score-management-sequence.puml[svg]
+
+=== Génération des questions
+
+- **Nom :** Générateur de questions
+- **Quoi :** Crée des questions basées sur des stratégies de difficulté.
+- **Wireframe + Explications :**
+Utilise l'interface `IQuestionGenerator` avec des stratégies comme `DifficultyStrategy`.
+- **Diagrammes de séquences systèmes :**
+
+plantuml::src/docs/models/diagrams/seq/question-generation-sequence.puml[svg]
 
 == Comment installer ?
 
@@ -105,7 +143,3 @@ public class CustomGame extends AbstractGame {
 L'architecture d'IQPlayLib est basée sur plusieurs interfaces, classes abstraites et concrètes, qui définissent les composants essentiels d'un jeu de quiz. Les développeurs peuvent étendre ces interfaces et classes pour personnaliser le comportement de leur jeu.
 
 plantuml::src/docs/models/diagrams/architecture.puml[svg]
-
-Diagramme de classes un peu moins condensée :
-
-plantuml::src/docs/models/diagrams/architecturev2.puml[svg]

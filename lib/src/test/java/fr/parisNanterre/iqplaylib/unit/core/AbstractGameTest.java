@@ -1,11 +1,11 @@
 package fr.parisnanterre.iqplaylib.unit.core;
 
+import fr.parisnanterre.iqplaylib.Level;
+import fr.parisnanterre.iqplaylib.Score;
 import fr.parisnanterre.iqplaylib.api.*;
 import fr.parisnanterre.iqplaylib.core.AbstractGame;
 import fr.parisnanterre.iqplaylib.core.AbstractGameSession;
-import fr.parisnanterre.iqplaylib.core.Level;
 import fr.parisnanterre.iqplaylib.core.QuestionStorageSession;
-import fr.parisnanterre.iqplaylib.core.Score;
 import fr.parisnanterre.iqplaylib.core.QuestionGenerator;
 import fr.parisnanterre.iqplaylib.core.DifficultyStrategy;
 import fr.parisnanterre.iqplaylib.exceptions.SessionAlreadyExistsException;
@@ -30,12 +30,6 @@ class AbstractGameTest {
         public TestGameSession(IGame game) {
             super(game);
         }
-
-        @Override
-        protected ILevel createLevel() { return new Level(); }
-
-        @Override
-        protected IScore createScore() { return new Score(); }
 
         @Override
         protected IQuestionStorageSession createQuestionStorageSession() { return new QuestionStorageSession(); }
@@ -63,7 +57,9 @@ class AbstractGameTest {
     void testCreateMultipleSessionsFromAbstractGame() throws SessionAlreadyExistsException {
         IGame game = new TestGame("Abstract Test Game");
         IGameSession session1 = game.createSession();
-        session1.start();
+        ILevel level = new Level();
+        IScore score = new Score();
+        session1.start(level, score);
         assertThrows(SessionAlreadyExistsException.class, () -> game.createSession());
     }
 }

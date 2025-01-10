@@ -1,33 +1,11 @@
 package fr.parisnanterre.iqplaylib.core;
 
-import fr.parisnanterre.iqplaylib.api.*;
-
 /**
- * This class represents a level management system implementing the ILevel interface.
- * It allows initialization and adjustment of the current level up or down, with a minimum level of 1.
+ * A concrete implementation of the AbstractLevel class for testing and production use.
  */
-public class Level implements ILevel {
-    private int currentLevel;
+public class Level extends AbstractLevel {
 
-    @Override
-    public void init() {
-        this.currentLevel = 1;
-    }
-
-    @Override
-    public int level() {
-        return currentLevel;
-    }
-
-    @Override
-    public void levelUp() {
-        currentLevel++;
-    }
-
-    @Override
-    public void levelDown() {
-        if (currentLevel > 1) {
-            currentLevel--;
-        }
+    public Level(int initialLevel) {
+        super(initialLevel); // Passe le niveau initial
     }
 }

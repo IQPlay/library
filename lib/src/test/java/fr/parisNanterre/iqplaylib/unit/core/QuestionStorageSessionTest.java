@@ -36,12 +36,4 @@ class QuestionStorageSessionTest {
         assertEquals(1, storageSession.playerAnswers().size(), "Il doit y avoir une réponse du joueur stockée");
         assertEquals(playerAnswer, storageSession.playerAnswers().get(0), "La réponse du joueur doit correspondre à celle ajoutée");
     }
-
-    @Test
-    void testQuestionStorageSessionScore() {
-        // Vérifier l'accès et l'état initial du score
-        assertEquals(0, storageSession.score().score(), "Le score initial doit être 0 dans le storage");
-        storageSession.score().incrementScore(10);
-        assertEquals(10, storageSession.score().score(), "Le score doit maintenant être de 10");
-    }
 }

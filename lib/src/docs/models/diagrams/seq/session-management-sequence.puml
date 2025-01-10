@@ -1,0 +1,14 @@
+@startuml
+
+title Gestion des sessions : Création d'une session
+
+actor Joueur
+participant IGame
+participant IGameSession
+
+Joueur -> IGame : createSession()
+IGame -> IGameSession : Instanciation de la session
+IGameSession -> IGameSession : Initialisation de l'état à CREATED
+return Nouvelle session
+
+@enduml

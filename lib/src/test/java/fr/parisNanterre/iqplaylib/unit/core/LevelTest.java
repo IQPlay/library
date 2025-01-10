@@ -1,7 +1,7 @@
 package fr.parisnanterre.iqplaylib.unit.core;
 
+import fr.parisnanterre.iqplaylib.Level;
 import fr.parisnanterre.iqplaylib.api.ILevel;
-import fr.parisnanterre.iqplaylib.core.Level;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,6 @@ class LevelTest {
     @BeforeEach
     void setUp() {
         level = new Level();
-        level.init();
     }
 
     @Test

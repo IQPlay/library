@@ -16,22 +16,19 @@ public abstract class AbstractGameSession implements IGameSession {
 
     protected AbstractGameSession(IGame game) {
         this.game = game;
-        this.level = createLevel();
-        this.score = createScore();
         this.questionStorage = createQuestionStorageSession();
         this.questionGenerator = createQuestionGenerator();
         this.state = StateGameSessionEnum.CREATED;
     }
 
-    protected abstract ILevel createLevel();
-    protected abstract IScore createScore();
     protected abstract IQuestionStorageSession createQuestionStorageSession();
     protected abstract IQuestionGenerator createQuestionGenerator();
 
     @Override
-    public void start() {
+    public void start(ILevel level, IScore score) {
         this.state = StateGameSessionEnum.STARTED;
-        level.init();
+        this.level = level;
+        this.score = score;
     }
 
     @Override

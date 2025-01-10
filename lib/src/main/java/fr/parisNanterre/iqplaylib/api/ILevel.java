@@ -7,7 +7,6 @@ package fr.parisnanterre.iqplaylib.api;
  * This can be particularly useful in scenarios like games or difficulty management systems.
  */
 public interface ILevel {
-    void init();
     int level();
     void levelUp();
     void levelDown();

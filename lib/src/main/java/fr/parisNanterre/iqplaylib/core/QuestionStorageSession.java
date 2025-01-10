@@ -13,13 +13,11 @@ public class QuestionStorageSession implements IQuestionStorageSession {
     private List<IQuestion> questions;
     private List<ICorrectAnswer> correctAnswers;
     private List<IPlayerAnswer> playerAnswers;
-    private IScore score;
 
     public QuestionStorageSession() {
         this.questions = new ArrayList<>();
         this.correctAnswers = new ArrayList<>();
         this.playerAnswers = new ArrayList<>();
-        this.score = new Score();
     }
 
     @Override
@@ -27,7 +25,7 @@ public class QuestionStorageSession implements IQuestionStorageSession {
         if (questions.isEmpty()) {
             return null;
         }
-        return questions.get(questions.size() - 1);
+        return questions.getLast();
     }
 
     @Override
@@ -43,11 +41,6 @@ public class QuestionStorageSession implements IQuestionStorageSession {
     @Override
     public List<IPlayerAnswer> playerAnswers() {
         return new ArrayList<>(playerAnswers);
-    }
-
-    @Override
-    public IScore score() {
-        return score;
     }
 
     public void addQuestion(IQuestion question) {
