@@ -11,6 +11,6 @@ public interface IGameSession {
     IScore score();
     StateGameSessionEnum state();
     IQuestion nextQuestion();
-    void submitAnswer(IPlayerAnswer answer);
+    boolean submitAnswer(IPlayerAnswer answer);
     IQuestionStorageSession questionStorage();
 }

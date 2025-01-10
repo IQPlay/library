@@ -64,7 +64,7 @@ public abstract class AbstractGameSession implements IGameSession {
     }
 
     @Override
-    public void submitAnswer(IPlayerAnswer answer) {
+    public boolean submitAnswer(IPlayerAnswer answer) {
         questionStorage.addPlayerAnswer(answer);
         IQuestion lastQuestion = questionStorage.lastQuestion();
         ICorrectAnswer correctAnswer = lastQuestion.correctAnswer();
@@ -73,8 +73,10 @@ public abstract class AbstractGameSession implements IGameSession {
             score.incrementScore(1);
             level.levelUp();
             onCorrectAnswer();
+            return true;
         } else {
             onIncorrectAnswer();
+            return false;
         }
     }
 
