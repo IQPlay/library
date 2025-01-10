@@ -86,7 +86,7 @@ group = 'fr.parisnanterre'
 
 // Récupère le numéro de build depuis la propriété ou utiliser "local" par défaut
 def buildNumber = project.findProperty('buildNumber') ?: 'local'
-version = "0.3.${buildNumber}" // Format pour les versions stables ou SNAPSHOT
+version = "0.3.${buildNumber}-SNAPSHOT" // Format pour les versions stables ou SNAPSHOT
 
 publishing {
     publications {
