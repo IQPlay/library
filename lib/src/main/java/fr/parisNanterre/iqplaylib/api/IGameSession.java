@@ -5,6 +5,7 @@ package fr.parisnanterre.iqplaylib.api;
  */
 public interface IGameSession {
     void start(ILevel level, IScore score);
+    void resume();
     void pause();
     void end();
     ILevel level();
