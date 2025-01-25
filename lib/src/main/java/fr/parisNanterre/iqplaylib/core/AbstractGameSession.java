@@ -32,6 +32,11 @@ public abstract class AbstractGameSession implements IGameSession {
     }
 
     @Override
+    public void resume() {
+        this.state = StateGameSessionEnum.IN_PROGRESS;
+    }
+
+    @Override
     public void pause() {
         this.state = StateGameSessionEnum.PAUSED;
     }
