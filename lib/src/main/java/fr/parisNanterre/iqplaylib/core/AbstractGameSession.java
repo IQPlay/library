@@ -86,7 +86,8 @@ public abstract class AbstractGameSession implements IGameSession {
     }
 
     protected void onCorrectAnswer() {
-        // Par défaut, ne rien faire. Peut être surchargé.
+       questionStorage.addCorrectAnswer(questionStorage.lastQuestion().correctAnswer());
+        
     }
 
     protected void onIncorrectAnswer() {

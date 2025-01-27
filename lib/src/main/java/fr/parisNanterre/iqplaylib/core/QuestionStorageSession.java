@@ -52,6 +52,10 @@ public class QuestionStorageSession implements IQuestionStorageSession {
         playerAnswers.add(answer);
     }
 
+    public void addCorrectAnswer(ICorrectAnswer answer) {
+        correctAnswers.add(answer);
+    }
+
     @Override
     public IPlayerAnswer lastPlayerAnswer() {
         if (playerAnswers.isEmpty()) {

@@ -11,6 +11,7 @@ public interface IQuestionStorageSession {
     List<IQuestion> questions();
     List<ICorrectAnswer> correctAnswers();
     List<IPlayerAnswer> playerAnswers();
+    void addCorrectAnswer(ICorrectAnswer answer);
     void addQuestion(IQuestion question);
     void addPlayerAnswer(IPlayerAnswer answer);
     IPlayerAnswer lastPlayerAnswer();
