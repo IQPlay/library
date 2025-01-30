@@ -23,16 +23,35 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-          server-id: github  # Identifiant utilisé dans settings.xml
+          server-id: github
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
           settings-path: ${{ github.workspace }}
 
-      - name: Set unique version
-        run: echo "BUILD_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
+      - name: Read and increment build number
+        id: build-number
+        run: |
+          if [ ! -f build.version ]; then
+            echo "1" > build.version
+          fi
+          BUILD_NUMBER=$(cat build.version)
+          echo "Current build number: $BUILD_NUMBER"
+          NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
+          echo "$NEW_BUILD_NUMBER" > build.version
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Commit updated build number
+        if: github.ref_name == 'main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add build.version
+          git commit -m "Increment build number to $NEW_BUILD_NUMBER"
+          git push
 
       - name: Publish to GitHub Packages
         env:
           USERNAME: ${{ github.actor }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew publish -PbuildNumber=${{ github.run_number }}
+        run: ./gradlew publish -PbuildNumber=${{ env.BUILD_NUMBER }}

@@ -32,6 +32,11 @@ public abstract class AbstractGameSession implements IGameSession {
     }
 
     @Override
+    public void resume() {
+        this.state = StateGameSessionEnum.IN_PROGRESS;
+    }
+
+    @Override
     public void pause() {
         this.state = StateGameSessionEnum.PAUSED;
     }
@@ -64,7 +69,7 @@ public abstract class AbstractGameSession implements IGameSession {
     }
 
     @Override
-    public void submitAnswer(IPlayerAnswer answer) {
+    public boolean submitAnswer(IPlayerAnswer answer) {
         questionStorage.addPlayerAnswer(answer);
         IQuestion lastQuestion = questionStorage.lastQuestion();
         ICorrectAnswer correctAnswer = lastQuestion.correctAnswer();
@@ -73,13 +78,16 @@ public abstract class AbstractGameSession implements IGameSession {
             score.incrementScore(1);
             level.levelUp();
             onCorrectAnswer();
+            return true;
         } else {
             onIncorrectAnswer();
+            return false;
         }
     }
 
     protected void onCorrectAnswer() {
-        // Par défaut, ne rien faire. Peut être surchargé.
+       questionStorage.addCorrectAnswer(questionStorage.lastQuestion().correctAnswer());
+        
     }
 
     protected void onIncorrectAnswer() {

@@ -83,8 +83,10 @@ test {
 
 
 group = 'fr.parisnanterre'
-def buildNumber = project.findProperty('buildNumber') ?: 'local'
-version = "0.2-SNAPSHOT-${buildNumber}" // SNAPSHOT pour les versions en développement
+
+// Récupère le numéro de build depuis la propriété ou utiliser "local" par défaut
+def buildNumber = 2
+version = "0.3.${buildNumber}-SNAPSHOT" // Format pour les versions stables ou SNAPSHOT
 
 publishing {
     publications {

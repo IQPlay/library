@@ -5,12 +5,13 @@ package fr.parisnanterre.iqplaylib.api;
  */
 public interface IGameSession {
     void start(ILevel level, IScore score);
+    void resume();
     void pause();
     void end();
     ILevel level();
     IScore score();
     StateGameSessionEnum state();
     IQuestion nextQuestion();
-    void submitAnswer(IPlayerAnswer answer);
+    boolean submitAnswer(IPlayerAnswer answer);
     IQuestionStorageSession questionStorage();
 }
