@@ -1,0 +1,33 @@
+name: Build and Upload Doxygen
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Install Doxygen + Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Generate documentation
+        run: doxygen Doxyfile
+
+      - name: Zip documentation
+        run: zip -r doxygen-doc.zip docs
+
+      - name: Upload release asset
+        if: ${{ github.event_name == 'release' }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: doxygen-doc.zip
+          asset_name: doxygen-doc.zip
+          tag: ${{ github.event.release.tag_name }}
