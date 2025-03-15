@@ -20,6 +20,7 @@ public class GameLayerService{
 
     private static final String API_URL = "https://api.gamelayer.co"; // URL de base de l'API
     private static String API_KEY;
+    private static String ACCOUNT_ID;
 
     private final ObjectMapper objectMapper = new ObjectMapper(); // Jackson ObjectMapper
 
@@ -36,8 +37,9 @@ public class GameLayerService{
             Properties properties = new Properties();
             properties.load(input);
             API_KEY = properties.getProperty("api.gamelayer.key");
-            if (API_KEY == null || API_KEY.isEmpty()) {
-                throw new IOException("Clé API GameLayer non trouvée !");
+            ACCOUNT_ID = properties.getProperty("api.gamelayer.accountId");
+            if ((API_KEY == null || API_KEY.isEmpty()) || (ACCOUNT_ID == null || ACCOUNT_ID.isEmpty())) {
+                throw new IOException("Clé API GameLayer ou id du compte non trouvée !");
             }
         } catch (IOException e) {
             e.printStackTrace();
