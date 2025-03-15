@@ -18,10 +18,10 @@ public abstract class GameLayerService implements IGameLayerService {
     protected static String ACCOUNT_ID;
 
     static {
-        loadApiKey();
+        loadApiCredential();
     }
 
-    private static void loadApiKey() {
+    public static void loadApiCredential() {
         try (InputStream input = GameLayerService.class.getClassLoader().getResourceAsStream("application.properties")) {
             if (input == null) {
                 throw new IOException("Fichier application.properties introuvable !");
