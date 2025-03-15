@@ -3,29 +3,40 @@ package fr.parisnanterre.iqplaylib.gamelayer;
 import java.io.IOException;
 
 /**
- * Quelques idées de méthodes à implémenter pour l'api GameLayer.
+ * Interface définissant les méthodes d'accès à l'API GameLayer.
  */
 interface IGameLayerService {
 
-    // Trophées
-    String getAchievementById(String id) throws IOException;
+    // 📌 Gestion des joueurs
+    String createPlayer(String name, String team, int points, int credits, String levelId, String levelName) throws IOException;
 
+    String getPlayerById(String playerId) throws IOException;
+    
+    void deletePlayerById(String playerId) throws IOException; 
+    
+    String updatePlayer(String playerId, String fieldToUpdate, Object value) throws IOException; 
+    
+    String getPlayerLevels(String playerId) throws IOException; 
+
+    // 📌 Trophées
+    String getAchievementById(String id) throws IOException;
+    
     String getAllAchievements() throws IOException;
 
-    // Stats
+    // 📌 Stats
     String getAnalytics() throws IOException;
 
     String getActivePlayers() throws IOException;
 
-    // Events
+    // 📌 Events
     void completeEvent(String eventId) throws IOException;
 
     String getEventById(String id) throws IOException;
 
     String getAllEvents() throws IOException;
 
-    // Leaderboards
-    String getLeaderboardById(String id) throws IOException ;
+    // 📌 Classements (Leaderboards)
+    String getLeaderboardById(String id) throws IOException;
 
     String getAllLeaderboards() throws IOException;
 
@@ -33,9 +44,8 @@ interface IGameLayerService {
 
     String getAllLevels() throws IOException;
 
-    // Missions
+    // 📌 Missions
     String getMissionById(String id) throws IOException;
 
     String getAllMissions() throws IOException;
-
 }
