@@ -2,6 +2,8 @@ package fr.parisnanterre.iqplaylib.gamelayer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.PlayerDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -13,6 +15,8 @@ import java.util.Properties;
 
 @Service
 public class GameLayerService{
+
+    private static final Logger logger = LoggerFactory.getLogger(GameLayerService.class);
 
     private static final String API_URL = "https://api.gamelayer.co"; // URL de base de l'API
     private static String API_KEY;
@@ -31,7 +35,7 @@ public class GameLayerService{
             }
             Properties properties = new Properties();
             properties.load(input);
-            API_KEY = properties.getProperty("api.gamelayer");
+            API_KEY = properties.getProperty("api.gamelayer.key");
             if (API_KEY == null || API_KEY.isEmpty()) {
                 throw new IOException("Clé API GameLayer non trouvée !");
             }
