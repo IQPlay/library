@@ -5,11 +5,21 @@ import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerQuizzService;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 public class GameLayerQuizzService extends GameLayerService implements IGameLayerQuizzService {
+
+    public GameLayerQuizzService() {
+        super();
+    }
+
+    public GameLayerQuizzService(HttpClient httpClient) {
+        super(httpClient);
+    }
+
     @Override
     public HttpResponse getQuizzById(String quizz, String account) throws IOException, InterruptedException {
         String encodedQuizz = URLEncoder.encode(quizz, "UTF-8");

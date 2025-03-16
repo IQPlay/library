@@ -6,11 +6,20 @@ import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GameLayerEventService extends GameLayerService implements IGameLayerEventService
 {
+
+    public GameLayerEventService() {
+        super();
+    }
+
+    public GameLayerEventService(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     @Override
     public HttpResponse completeEvent(String eventId, String player, String account) throws IOException, InterruptedException {

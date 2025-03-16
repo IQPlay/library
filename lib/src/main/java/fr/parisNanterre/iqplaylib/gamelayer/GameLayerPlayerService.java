@@ -7,6 +7,7 @@ import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
 import java.io.*;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
@@ -14,6 +15,14 @@ import java.util.Map;
 
 public class GameLayerPlayerService extends GameLayerService implements IGameLayerPlayerService, IPlayerAchivement, IPlayerEvent,IPlayerLevel, IPlayerMission, IPlayerPrizes, IPlayerRanking, IPlayerStreak {
 
+
+    public GameLayerPlayerService() {
+        super();
+    }
+
+    public GameLayerPlayerService(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     /**
      * Crée un joueur sur GameLayer.

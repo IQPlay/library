@@ -5,11 +5,21 @@ import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerMissionService;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GameLayerMissionService extends GameLayerService implements IGameLayerMissionService
 {
+
+    public GameLayerMissionService() {
+        super();
+    }
+
+    public GameLayerMissionService(HttpClient httpClient) {
+        super(httpClient);
+    }
+
     @Override
     public HttpResponse getMissionById(String missionId, String account) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(missionId, "UTF-8");

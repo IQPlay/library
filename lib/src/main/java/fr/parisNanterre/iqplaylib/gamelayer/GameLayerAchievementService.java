@@ -5,10 +5,19 @@ import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerAchievementService;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GameLayerAchievementService extends GameLayerService implements IGameLayerAchievementService {
+
+    public GameLayerAchievementService() {
+        super();
+    }
+
+    public GameLayerAchievementService(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     @Override
     public HttpResponse getAchievementById(String achievementId, String account) throws IOException, InterruptedException {

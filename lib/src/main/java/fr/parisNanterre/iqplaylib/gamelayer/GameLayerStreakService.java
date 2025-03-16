@@ -5,10 +5,20 @@ import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerStreakService;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GameLayerStreakService extends GameLayerService implements IGameLayerStreakService {
+
+
+    public GameLayerStreakService() {
+        super();
+    }
+
+    public GameLayerStreakService(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     @Override
     public HttpResponse getStreakById(String streakId, String account) throws IOException, InterruptedException {

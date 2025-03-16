@@ -2,6 +2,7 @@ package fr.parisnanterre.iqplaylib.gamelayer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerService;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,28 +16,25 @@ import java.util.Properties;
 public abstract class GameLayerService implements IGameLayerService {
 
     protected static final Logger logger = LoggerFactory.getLogger(GameLayerService.class);
-    protected static final String API_URL = "https://api.gamelayer.co";
+    protected static String API_URL = "https://api.gamelayer.co";
     protected static String API_KEY;
     protected static String ACCOUNT_ID;
     protected final ObjectMapper objectMapper = new ObjectMapper();
-    protected final HttpClient httpClient = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(10))
-            .build();
+    protected HttpClient httpClient;
 
-    static {
+    protected GameLayerService() {
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+    }
+
+    protected GameLayerService(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
+
+    @PostConstruct
+    public void init() {
         loadApiCredential();
-    }
-
-    public String getApiKey() {
-        return API_KEY;
-    }
-
-    public String getAccountId() {
-        return ACCOUNT_ID;
-    }
-
-    public String getApiUrl() {
-        return API_URL;
     }
 
     public static void loadApiCredential() {

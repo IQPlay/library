@@ -5,10 +5,19 @@ import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerLeaderBoardService;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GameLayerLeaderBoardService extends GameLayerService implements IGameLayerLeaderBoardService {
+
+    public GameLayerLeaderBoardService() {
+        super();
+    }
+
+    public GameLayerLeaderBoardService(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     /** cette méthode bug, l'implémentation est correcte, l'url et les paramètres sont correcte mais le serveur ne trouve
      * pas la ressource demandée

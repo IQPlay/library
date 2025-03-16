@@ -5,10 +5,20 @@ import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerLevelService;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class GameLayerLevelService extends GameLayerService implements IGameLayerLevelService {
+
+
+    public GameLayerLevelService() {
+        super();
+    }
+
+    public GameLayerLevelService(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     @Override
     public HttpResponse getLevelById(String levelId, String account) throws IOException, InterruptedException {
