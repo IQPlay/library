@@ -3,11 +3,8 @@ package fr.parisnanterre.iqplaylib.gamelayer.api;
 import java.io.IOException;
 
 public interface IGameLayerLeaderBoardService {
-    String getLeaderboardById(String id) throws IOException;
+    void getLeaderboardById(String leaderboardId, String account) throws IOException, InterruptedException;
 
-    String getAllLeaderboards() throws IOException;
+    void getAllLeaderboards(String account) throws IOException, InterruptedException;
 
-    String getLevelById(String id) throws IOException;
-
-    String getAllLevels() throws IOException;
 }
