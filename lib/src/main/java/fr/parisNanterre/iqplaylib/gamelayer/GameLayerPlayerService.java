@@ -1,6 +1,6 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
-import fr.parisnanterre.iqplaylib.gamelayer.api.player.IGameLayerPlayerService;
+import fr.parisnanterre.iqplaylib.gamelayer.api.player.*;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.player.NewPlayerDTO;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
 
@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameLayerPlayerService extends GameLayerService implements IGameLayerPlayerService {
+public class GameLayerPlayerService extends GameLayerService implements IGameLayerPlayerService, IPlayerAchivement, IPlayerEvent,IPlayerLevel, IPlayerMission, IPlayerPrizes, IPlayerRanking, IPlayerStreak {
 
 
     /**
@@ -106,4 +106,44 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         System.out.println("Response Body: " + response.body());
     }
 
+
+    @Override
+    public void getAchivementsByPlayer(String player, String account) throws IOException, InterruptedException {
+        
+    }
+
+    @Override
+    public void getEventsByPlayer(String player, String account) throws Exception, InterruptedException {
+
+    }
+
+    @Override
+    public void getLevelsByPlayer(String player, String account) throws IOException, InterruptedException {
+
+    }
+
+    @Override
+    public void getMissionByPlayerId(String player, String account) throws IOException, InterruptedException {
+
+    }
+
+    @Override
+    public void getMissionByPlayerIdAndMissionId(String player, String account, String missionId) throws IOException, InterruptedException {
+
+    }
+
+    @Override
+    public void getPrizesByPlayer(String player, String account) throws IOException, InterruptedException {
+
+    }
+
+    @Override
+    public void getRankingByPlayer(String player, String account) throws Exception, InterruptedException {
+
+    }
+
+    @Override
+    public void getPlayerStreak(String player, String account) throws IOException, InterruptedException {
+
+    }
 }
