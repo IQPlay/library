@@ -1,6 +1,5 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerPlayerService;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.player.NewPlayerDTO;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
@@ -8,20 +7,13 @@ import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
 import java.io.*;
 import java.net.URI;
 import java.net.URLEncoder;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GameLayerPlayerService extends GameLayerService implements IGameLayerPlayerService {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    private final HttpClient httpClient = HttpClient.newBuilder()
-            .connectTimeout(Duration.ofSeconds(10))
-            .build();
 
     /**
      * Crée un joueur sur GameLayer.

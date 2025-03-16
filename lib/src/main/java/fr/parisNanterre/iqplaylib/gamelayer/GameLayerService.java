@@ -1,11 +1,14 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.net.http.HttpClient;
+import java.time.Duration;
 import java.util.Properties;
 
 @Service
@@ -16,6 +19,12 @@ public abstract class GameLayerService implements IGameLayerService {
     protected static final String API_URL = "https://api.gamelayer.co";
     protected static String API_KEY;
     protected static String ACCOUNT_ID;
+
+    protected final ObjectMapper objectMapper = new ObjectMapper();
+
+    protected final HttpClient httpClient = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(10))
+            .build();
 
     static {
         loadApiCredential();
