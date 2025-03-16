@@ -1,0 +1,26 @@
+meta {
+  name: Create a player
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://api.gamelayer.co/api/v0/players
+  body: json
+  auth: none
+}
+
+headers {
+  api-key: 
+}
+
+body:json {
+  {
+    "name": "John Doe",
+    "points": 100,
+    "credits": 50,
+    "player": "4",
+    "account": ""
+  }
+  
+}

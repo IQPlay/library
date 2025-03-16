@@ -1,0 +1,20 @@
+meta {
+  name: Get player by ID
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://api.gamelayer.co/api/v0/players?player=test-111&account
+  body: none
+  auth: none
+}
+
+params:query {
+  player: test-111
+  account: 
+}
+
+headers {
+  api-key: 
+}

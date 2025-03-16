@@ -1,0 +1,27 @@
+meta {
+  name: Get an event
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://api.gamelayer.co/api/v0/events/1-test-event?account&language=fr
+  body: none
+  auth: none
+}
+
+params:query {
+  account: 
+  language: fr
+}
+
+headers {
+  api-key: 
+}
+
+body:json {
+  {
+    "account": "agence-recherche",
+    "language": "fr"
+  }
+}

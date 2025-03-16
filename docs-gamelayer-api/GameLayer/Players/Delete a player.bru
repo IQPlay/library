@@ -1,0 +1,25 @@
+meta {
+  name: Delete a player
+  type: http
+  seq: 3
+}
+
+delete {
+  url: https://api.gamelayer.co/api/v0/players/1?account
+  body: json
+  auth: none
+}
+
+params:query {
+  account: 
+}
+
+headers {
+  api-key: 
+}
+
+body:json {
+  {
+    "hardDelete": false
+  }
+}
