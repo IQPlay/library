@@ -14,14 +14,11 @@ import java.util.Properties;
 @Service
 public abstract class GameLayerService implements IGameLayerService {
 
-    private static final Logger logger = LoggerFactory.getLogger(GameLayerService.class);
-
+    protected static final Logger logger = LoggerFactory.getLogger(GameLayerService.class);
     protected static final String API_URL = "https://api.gamelayer.co";
     protected static String API_KEY;
     protected static String ACCOUNT_ID;
-
     protected final ObjectMapper objectMapper = new ObjectMapper();
-
     protected final HttpClient httpClient = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
             .build();
