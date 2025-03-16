@@ -31,7 +31,8 @@ jobs:
       - name: Read version from build.gradle
         id: read-version
         run: |
-          VERSION=$(grep -oP 'version = "\K[^"]+' build.gradle)
+          ls -alh lib/
+          VERSION=$(grep -oP 'version = "\K[^"]+' lib/build.gradle)
           echo "Current version: $VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           BUILD_NUMBER=${VERSION}
