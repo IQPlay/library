@@ -1,6 +1,6 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
-import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerPlayerService;
+import fr.parisnanterre.iqplaylib.gamelayer.api.player.IGameLayerPlayerService;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.player.NewPlayerDTO;
 import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
 
