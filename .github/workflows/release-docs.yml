@@ -23,11 +23,9 @@ jobs:
       - name: Zip documentation
         run: zip -r doxygen-doc.zip docs
 
-      - name: Upload release asset
-        if: ${{ github.event_name == 'release' }}
-        uses: svenstaro/upload-release-action@v2
+      - name: Upload Doxygen documentation to GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: doxygen-doc.zip
-          asset_name: doxygen-doc.zip
-          tag: ${{ github.event.release.tag_name }}
+          files: doxygen-doc.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
