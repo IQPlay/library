@@ -32,9 +32,8 @@ jobs:
       - name: Authenticate with GitHub CLI
         run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Create GitHub Release (if it doesn't exist) and upload documentation
+      - name: Upload documentation to GitHub Release
         run: |
-          gh release create ${{ github.ref }} --generate-notes || echo "Release already exists, skipping creation."
-          gh release upload ${{ github.ref }} doxygen-doc.zip --clobber
+          gh release upload ${{ github.ref_name }} doxygen-doc.zip --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
