@@ -30,8 +30,8 @@ public class GameLayerStreakService extends GameLayerService implements IGameLay
                         .build(),
                 HttpResponse.BodyHandlers.ofString()
         );
-        System.out.println("Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.body());
+        super.logInformation("Status Code: " + response.statusCode());
+        super.logInformation("Response Body: " + response.body());
         return response;
     }
 
@@ -51,8 +51,8 @@ public class GameLayerStreakService extends GameLayerService implements IGameLay
                         .build(),
                 HttpResponse.BodyHandlers.ofString()
         );
-        System.out.println("Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.body());
+        super.logInformation("Status Code: " + response.statusCode());
+        super.logInformation("Response Body: " + response.body());
         return response;
     }
 }

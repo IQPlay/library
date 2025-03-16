@@ -30,13 +30,12 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
                 HttpResponse.BodyHandlers.ofString()
         );
 
-        System.out.println("Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.body());
-
         if (response.statusCode() >= 400) {
             throw new RuntimeException("Échec de la requête : " + response.statusCode()
                     + "\nDétails : " + response.body());
         }
+        super.logInformation("Status Code: " + response.statusCode());
+        super.logInformation("Response Body: " + response.body());
         return response;
     }
 
@@ -60,8 +59,8 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
                         .build(),
                 HttpResponse.BodyHandlers.ofString()
         );
-        System.out.println("Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.body());
+        super.logInformation("Status Code: " + response.statusCode());
+        super.logInformation("Response Body: " + response.body());
         return response;
     }
 
@@ -81,8 +80,8 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
                         .build(),
                 HttpResponse.BodyHandlers.ofString()
         );
-        System.out.println("Status Code: " + response.statusCode());
-        System.out.println("Response Body: " + response.body());
+        super.logInformation("Status Code: " + response.statusCode());
+        super.logInformation("Response Body: " + response.body());
         return response;
     }
 }

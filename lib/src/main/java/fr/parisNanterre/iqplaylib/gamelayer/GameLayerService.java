@@ -56,4 +56,7 @@ public abstract class GameLayerService implements IGameLayerService {
         }
     }
 
+    protected void logInformation(String message) {
+        logger.info(message);
+    }
 }
