@@ -3,13 +3,11 @@ package fr.parisnanterre.iqplaylib.gamelayer.api;
 import java.io.IOException;
 
 public interface IGameLayerPlayerService {
-    String createPlayer(String name, String team, int points, int credits, String levelId, String levelName) throws IOException;
+    void createPlayer(String name, int points, int credits, String player, String account) throws IOException, InterruptedException;
 
-    String getPlayerById(String playerId) throws IOException;
+    void getPlayerById(String player, String account) throws IOException, InterruptedException;
 
-    void deletePlayerById(String playerId) throws IOException;
+    void deletePlayerById(String player, String account) throws IOException, InterruptedException;
 
-    String updatePlayer(String playerId, String fieldToUpdate, Object value) throws IOException;
-
-    String getPlayerLevels(String playerId) throws IOException;
+//    void updatePlayer(String playerId, String fieldToUpdate, Object value) throws IOException;
 }
