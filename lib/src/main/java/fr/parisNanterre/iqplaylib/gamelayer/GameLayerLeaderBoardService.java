@@ -14,7 +14,7 @@ public class GameLayerLeaderBoardService extends GameLayerService implements IGa
      * pas la ressource demandée
      */
     @Override
-    public void getLeaderboardById(String leaderboardId, String account) throws IOException, InterruptedException {
+    public HttpResponse getLeaderboardById(String leaderboardId, String account) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(leaderboardId, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -35,10 +35,11 @@ public class GameLayerLeaderBoardService extends GameLayerService implements IGa
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getAllLeaderboards(String account) throws IOException, InterruptedException {
+    public HttpResponse getAllLeaderboards(String account) throws IOException, InterruptedException {
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
         String fullUrl = API_URL + "/api/v0/leaderboards" + "?account=" + encodedAccount;
@@ -55,5 +56,6 @@ public class GameLayerLeaderBoardService extends GameLayerService implements IGa
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());;
+        return response;
     }
 }

@@ -1,10 +1,11 @@
 package fr.parisnanterre.iqplaylib.gamelayer.api;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 
 public interface IGameLayerLeaderBoardService {
-    void getLeaderboardById(String leaderboardId, String account) throws IOException, InterruptedException;
+    HttpResponse getLeaderboardById(String leaderboardId, String account) throws IOException, InterruptedException;
 
-    void getAllLeaderboards(String account) throws IOException, InterruptedException;
+    HttpResponse getAllLeaderboards(String account) throws IOException, InterruptedException;
 
 }

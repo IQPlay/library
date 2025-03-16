@@ -19,7 +19,7 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
      * Crée un joueur sur GameLayer.
      */
     @Override
-    public void createPlayer(String name, int points, int credits,
+    public HttpResponse createPlayer(String name, int points, int credits,
                              String player, String account)
             throws IOException, InterruptedException {
 
@@ -45,13 +45,14 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
             throw new RuntimeException("Échec de la requête : " + response.statusCode()
                     + "\nDétails : " + response.body());
         }
+        return response;
     }
 
     /**
      * Récupère les informations d'un joueur par son ID.
      */
     @Override
-    public void getPlayerById(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse getPlayerById(String player, String account) throws IOException, InterruptedException {
 
         PlayerDTO playerDTO = new PlayerDTO(player, account);
         String encodedPlayer = URLEncoder.encode(playerDTO.getPlayer(), "UTF-8");
@@ -61,7 +62,7 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
                 + "?player=" + encodedPlayer
                 + "&account=" + encodedAccount;
 
-        httpClient.send(
+        HttpResponse response = httpClient.send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
@@ -71,6 +72,7 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
                         .build(),
                 HttpResponse.BodyHandlers.ofString()
         );
+        return response;
     }
 
 
@@ -80,7 +82,7 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
      * eg : /api/v0/players/3?account=agence-recherche
      */
     @Override
-    public void deletePlayerById(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse deletePlayerById(String player, String account) throws IOException, InterruptedException {
         PlayerDTO playerDTO = new PlayerDTO(player, account);
         String encodedPlayer = URLEncoder.encode(playerDTO.getPlayer(), "UTF-8");
         String encodedAccount = URLEncoder.encode(playerDTO.getAccount(), "UTF-8");
@@ -104,11 +106,12 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
 
     @Override
-    public void getAchivementsByPlayer(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse getAchivementsByPlayer(String player, String account) throws IOException, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -128,10 +131,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getEventsByPlayer(String player, String account) throws Exception, InterruptedException {
+    public HttpResponse getEventsByPlayer(String player, String account) throws Exception, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -151,10 +155,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getLevelsByPlayer(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse getLevelsByPlayer(String player, String account) throws IOException, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -174,10 +179,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getMissionByPlayerId(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse getMissionByPlayerId(String player, String account) throws IOException, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -197,10 +203,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getMissionByPlayerIdAndMissionId(String player, String account, String missionId) throws IOException, InterruptedException {
+    public HttpResponse getMissionByPlayerIdAndMissionId(String player, String account, String missionId) throws IOException, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
         String encodedMissionId = URLEncoder.encode(missionId, "UTF-8");
@@ -222,10 +229,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getPrizesByPlayer(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse getPrizesByPlayer(String player, String account) throws IOException, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -245,10 +253,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getRankingByPlayer(String player, String account) throws Exception, InterruptedException {
+    public HttpResponse getRankingByPlayer(String player, String account) throws Exception, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -268,10 +277,11 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getPlayerStreak(String player, String account) throws IOException, InterruptedException {
+    public HttpResponse getPlayerStreak(String player, String account) throws IOException, InterruptedException {
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -291,5 +301,6 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 }

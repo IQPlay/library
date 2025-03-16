@@ -1,8 +1,9 @@
 package fr.parisnanterre.iqplaylib.gamelayer.api;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 
 public interface IGameLayerMissionService {
-    void getMissionById(String missionId, String account) throws IOException, InterruptedException;
-    void getAllMissions(String account) throws IOException, InterruptedException;
+    HttpResponse getMissionById(String missionId, String account) throws IOException, InterruptedException;
+    HttpResponse getAllMissions(String account) throws IOException, InterruptedException;
 }

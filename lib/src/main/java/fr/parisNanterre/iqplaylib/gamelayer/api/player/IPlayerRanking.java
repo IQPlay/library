@@ -1,5 +1,7 @@
 package fr.parisnanterre.iqplaylib.gamelayer.api.player;
 
+import java.net.http.HttpResponse;
+
 public interface IPlayerRanking {
-    void getRankingByPlayer(String player, String account) throws Exception, InterruptedException;
+    HttpResponse getRankingByPlayer(String player, String account) throws Exception, InterruptedException;
 }

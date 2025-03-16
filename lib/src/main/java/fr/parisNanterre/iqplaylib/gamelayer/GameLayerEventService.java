@@ -13,7 +13,7 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
 {
 
     @Override
-    public void completeEvent(String eventId, String player, String account) throws IOException, InterruptedException {
+    public HttpResponse completeEvent(String eventId, String player, String account) throws IOException, InterruptedException {
 
         HttpResponse<String> response = httpClient.send(
                 HttpRequest.newBuilder()
@@ -37,10 +37,11 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
             throw new RuntimeException("Échec de la requête : " + response.statusCode()
                     + "\nDétails : " + response.body());
         }
+        return response;
     }
 
     @Override
-    public void getEventById(String eventId, String account) throws IOException, InterruptedException {
+    public HttpResponse getEventById(String eventId, String account) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(eventId, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -61,10 +62,11 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getAllEvents(String account) throws IOException, InterruptedException {
+    public HttpResponse getAllEvents(String account) throws IOException, InterruptedException {
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
         String fullUrl = API_URL + "/api/v0/events" + "?account=" + encodedAccount;
@@ -81,5 +83,6 @@ public class GameLayerEventService extends GameLayerService implements IGameLaye
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 }

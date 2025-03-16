@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class GameLayerLevelService extends GameLayerService implements IGameLayerLevelService {
 
     @Override
-    public void getLevelById(String levelId, String account) throws IOException, InterruptedException {
+    public HttpResponse getLevelById(String levelId, String account) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(levelId, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -32,10 +32,11 @@ public class GameLayerLevelService extends GameLayerService implements IGameLaye
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getAllLevels(String account) throws IOException, InterruptedException {
+    public HttpResponse getAllLevels(String account) throws IOException, InterruptedException {
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
         String fullUrl = API_URL + "/api/v0/levels" + "?account=" + encodedAccount;
@@ -52,6 +53,7 @@ public class GameLayerLevelService extends GameLayerService implements IGameLaye
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
 }

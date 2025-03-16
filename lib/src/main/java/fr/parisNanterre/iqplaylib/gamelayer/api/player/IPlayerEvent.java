@@ -1,5 +1,7 @@
 package fr.parisnanterre.iqplaylib.gamelayer.api.player;
 
+import java.net.http.HttpResponse;
+
 public interface IPlayerEvent {
-    void getEventsByPlayer(String player, String account) throws Exception, InterruptedException;
+    HttpResponse getEventsByPlayer(String player, String account) throws Exception, InterruptedException;
 }

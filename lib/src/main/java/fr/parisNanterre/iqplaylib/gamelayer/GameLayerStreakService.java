@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class GameLayerStreakService extends GameLayerService implements IGameLayerStreakService {
 
     @Override
-    public void getStreakById(String streakId, String account) throws IOException, InterruptedException {
+    public HttpResponse getStreakById(String streakId, String account) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(streakId, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -32,10 +32,11 @@ public class GameLayerStreakService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getAllStreaks(String account) throws IOException, InterruptedException {
+    public HttpResponse getAllStreaks(String account) throws IOException, InterruptedException {
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
         String fullUrl = API_URL + "/api/v0/streaks" + "?account=" + encodedAccount;
@@ -52,5 +53,6 @@ public class GameLayerStreakService extends GameLayerService implements IGameLay
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 }

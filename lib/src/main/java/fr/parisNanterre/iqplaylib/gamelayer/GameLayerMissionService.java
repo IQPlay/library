@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class GameLayerMissionService extends GameLayerService implements IGameLayerMissionService
 {
     @Override
-    public void getMissionById(String missionId, String account) throws IOException, InterruptedException {
+    public HttpResponse getMissionById(String missionId, String account) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(missionId, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -32,10 +32,11 @@ public class GameLayerMissionService extends GameLayerService implements IGameLa
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getAllMissions(String account) throws IOException, InterruptedException {
+    public HttpResponse getAllMissions(String account) throws IOException, InterruptedException {
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
         String fullUrl = API_URL + "/api/v0/missions" + "?account=" + encodedAccount;
@@ -52,5 +53,6 @@ public class GameLayerMissionService extends GameLayerService implements IGameLa
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 }

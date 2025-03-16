@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class GameLayerAchievementService extends GameLayerService implements IGameLayerAchievementService {
 
     @Override
-    public void getAchievementById(String achievementId, String account) throws IOException, InterruptedException {
+    public HttpResponse getAchievementById(String achievementId, String account) throws IOException, InterruptedException {
         String encodedachievementId = URLEncoder.encode(achievementId, "UTF-8");
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
@@ -32,10 +32,11 @@ public class GameLayerAchievementService extends GameLayerService implements IGa
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
     @Override
-    public void getAllAchievements(String account) throws IOException, InterruptedException {
+    public HttpResponse getAllAchievements(String account) throws IOException, InterruptedException {
         String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
         String fullUrl = API_URL + "/api/v0/achievements" + "?account=" + encodedAccount;
@@ -52,6 +53,7 @@ public class GameLayerAchievementService extends GameLayerService implements IGa
         );
         System.out.println("Status Code: " + response.statusCode());
         System.out.println("Response Body: " + response.body());
+        return response;
     }
 
 }
