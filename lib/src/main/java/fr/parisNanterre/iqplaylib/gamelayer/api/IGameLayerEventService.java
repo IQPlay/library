@@ -3,9 +3,9 @@ package fr.parisnanterre.iqplaylib.gamelayer.api;
 import java.io.IOException;
 
 public interface IGameLayerEventService {
-    void completeEvent(String eventId) throws IOException;
+    void completeEvent(String eventId, String player, String account) throws IOException, InterruptedException;
 
-    String getEventById(String id) throws IOException;
+    void getEventById(String EventId, String account) throws IOException, InterruptedException;
 
-    String getAllEvents() throws IOException;
+    void getAllEvents(String account) throws IOException, InterruptedException;
 }
