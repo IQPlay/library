@@ -226,7 +226,25 @@ public class GameLayerPlayerService extends GameLayerService implements IGameLay
 
     @Override
     public void getPrizesByPlayer(String player, String account) throws IOException, InterruptedException {
+        String encodedPlayer = URLEncoder.encode(player, "UTF-8");
+        String encodedAccount = URLEncoder.encode(account, "UTF-8");
 
+        String fullUrl = API_URL + "/api/v0/players/"
+                + encodedPlayer + "/prizes"
+                + "?account=" + encodedAccount;
+
+        HttpResponse response = httpClient.send(
+                HttpRequest.newBuilder()
+                        .uri(URI.create(fullUrl))
+                        .headers(
+                                "api-key", API_KEY
+                        )
+                        .GET()
+                        .build(),
+                HttpResponse.BodyHandlers.ofString()
+        );
+        System.out.println("Status Code: " + response.statusCode());
+        System.out.println("Response Body: " + response.body());
     }
 
     @Override
