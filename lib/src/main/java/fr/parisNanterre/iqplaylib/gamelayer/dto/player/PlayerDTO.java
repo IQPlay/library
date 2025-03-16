@@ -1,4 +1,4 @@
-package fr.parisnanterre.iqplaylib.gamelayer.dto;
+package fr.parisnanterre.iqplaylib.gamelayer.dto.player;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

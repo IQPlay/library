@@ -2,8 +2,8 @@ package fr.parisnanterre.iqplaylib.gamelayer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerPlayerService;
-import fr.parisnanterre.iqplaylib.gamelayer.dto.NewPlayerDTO;
-import fr.parisnanterre.iqplaylib.gamelayer.dto.PlayerDTO;
+import fr.parisnanterre.iqplaylib.gamelayer.dto.player.NewPlayerDTO;
+import fr.parisnanterre.iqplaylib.gamelayer.dto.player.PlayerDTO;
 
 import java.io.*;
 import java.net.URI;
