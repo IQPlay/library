@@ -5,12 +5,13 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class GameLayerMissionServiceTest {
 
@@ -21,10 +22,11 @@ public class GameLayerMissionServiceTest {
     void setUp() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-        HttpClient testClient = HttpClient.newBuilder().build();
-        service = new GameLayerMissionService(testClient);
-        GameLayerService.API_URL = mockWebServer.url("/").toString();
-        GameLayerService.API_KEY = "dummy-api-key";
+
+        GameLayerMissionService realService = new GameLayerMissionService("dummy-key", "dummy-account");
+        service = Mockito.spy(realService);
+
+        when(service.getApiUrl()).thenReturn(mockWebServer.url("/").toString());
     }
 
     @Test
@@ -33,7 +35,7 @@ public class GameLayerMissionServiceTest {
                 .setResponseCode(200)
                 .setBody("{\"id\": \"mission-123\"}"));
 
-        HttpResponse response = service.getMissionById("mission-123", "test-account");
+        HttpResponse response = service.getMissionById("mission-123");
         assertEquals(200, response.statusCode());
     }
 
@@ -41,10 +43,9 @@ public class GameLayerMissionServiceTest {
     void getAllMissions_Test() throws Exception {
         mockWebServer.enqueue(new MockResponse()
                 .setResponseCode(200)
-                .setBody("[{\"id\": \"mission-123\"}, {\"id\": \"mission-456\"}]")
-        );
+                .setBody("[{\"id\": \"mission-123\"}, {\"id\": \"mission-456\"}]"));
 
-        HttpResponse response = service.getAllMissions("test-account");
+        HttpResponse response = service.getAllMissions();
         assertEquals(200, response.statusCode());
     }
 
