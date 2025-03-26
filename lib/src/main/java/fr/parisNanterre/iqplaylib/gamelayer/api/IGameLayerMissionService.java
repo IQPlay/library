@@ -4,6 +4,6 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 
 public interface IGameLayerMissionService {
-    HttpResponse getMissionById(String missionId, String account) throws IOException, InterruptedException;
-    HttpResponse getAllMissions(String account) throws IOException, InterruptedException;
+    HttpResponse getMissionById(String missionId) throws IOException, InterruptedException;
+    HttpResponse getAllMissions() throws IOException, InterruptedException;
 }

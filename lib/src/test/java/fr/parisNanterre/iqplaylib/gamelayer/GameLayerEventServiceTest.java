@@ -5,12 +5,13 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 public class GameLayerEventServiceTest {
 
@@ -21,11 +22,11 @@ public class GameLayerEventServiceTest {
     void setUp() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-        HttpClient testClient = HttpClient.newBuilder().build();
-        service = new GameLayerEventService(testClient);
-        GameLayerService.API_URL = mockWebServer.url("/").toString();
-        GameLayerService.API_KEY = "dummy-api-key";
-        GameLayerService.ACCOUNT_ID = "dummy-account-id";
+
+        GameLayerEventService realService = new GameLayerEventService("dummy-key", "dummy-account");
+        service = Mockito.spy(realService);
+
+        when(service.getApiUrl()).thenReturn(mockWebServer.url("/").toString());
     }
 
     @Test
@@ -36,7 +37,7 @@ public class GameLayerEventServiceTest {
                 .setBody(successBody)
                 .addHeader("Content-Type", "application/json"));
 
-        HttpResponse response = service.completeEvent("event123", "test-player", "test-account");
+        HttpResponse response = service.completeEvent("event123", "test-player");
         assertEquals(200, response.statusCode());
     }
 
@@ -49,7 +50,7 @@ public class GameLayerEventServiceTest {
                 .addHeader("Content-Type", "application/json"));
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            service.completeEvent("event123", "test-player", "test-account");
+            service.completeEvent("event123", "test-player");
         });
         assertTrue(exception.getMessage().contains("400"));
     }
@@ -62,7 +63,7 @@ public class GameLayerEventServiceTest {
                 .setBody(responseBody)
                 .addHeader("Content-Type", "application/json"));
 
-        HttpResponse response = service.getEventById("event123", "test-account");
+        HttpResponse response = service.getEventById("event123");
         assertEquals(200, response.statusCode());
     }
 
@@ -74,7 +75,7 @@ public class GameLayerEventServiceTest {
                 .setBody(responseBody)
                 .addHeader("Content-Type", "application/json"));
 
-        HttpResponse response = service.getAllEvents("test-account");
+        HttpResponse response = service.getAllEvents();
         assertEquals(200, response.statusCode());
     }
 

@@ -5,12 +5,13 @@ import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class GameLayerAchievementServiceTest {
 
@@ -21,11 +22,12 @@ public class GameLayerAchievementServiceTest {
     void setUp() throws IOException {
         mockWebServer = new MockWebServer();
         mockWebServer.start();
-        HttpClient testClient = HttpClient.newBuilder().build();
-        service = new GameLayerAchievementService(testClient);
-        GameLayerService.API_URL = mockWebServer.url("/").toString();
-        GameLayerService.API_KEY = "dummy-api-key";
-        GameLayerService.ACCOUNT_ID = "dummy-account-id";
+
+        GameLayerAchievementService realService = new GameLayerAchievementService("dummy-key", "dummy-account");
+
+        service = Mockito.spy(realService);
+
+        when(service.getApiUrl()).thenReturn(mockWebServer.url("/").toString());
     }
 
     @Test
@@ -36,7 +38,7 @@ public class GameLayerAchievementServiceTest {
                 .setBody(responseBody)
                 .addHeader("Content-Type", "application/json"));
 
-        HttpResponse response = service.getAchievementById("achiev123", "test-account");
+        HttpResponse response = service.getAchievementById("achiev123");
         assertEquals(200, response.statusCode());
     }
 
@@ -48,7 +50,7 @@ public class GameLayerAchievementServiceTest {
                 .setBody(responseBody)
                 .addHeader("Content-Type", "application/json"));
 
-        HttpResponse response = service.getAllAchievements("test-account");
+        HttpResponse response = service.getAllAchievements();
         assertEquals(200, response.statusCode());
     }
 

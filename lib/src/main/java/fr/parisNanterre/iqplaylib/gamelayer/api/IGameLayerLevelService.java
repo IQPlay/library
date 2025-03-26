@@ -4,6 +4,6 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 
 public interface IGameLayerLevelService {
-    HttpResponse getLevelById(String levelId, String account) throws IOException, InterruptedException;
-    HttpResponse getAllLevels(String account) throws IOException, InterruptedException;
+    HttpResponse getLevelById(String levelId) throws IOException, InterruptedException;
+    HttpResponse getAllLevels() throws IOException, InterruptedException;
 }

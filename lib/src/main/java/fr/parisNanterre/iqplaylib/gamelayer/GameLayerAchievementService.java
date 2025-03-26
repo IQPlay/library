@@ -1,6 +1,9 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerAchievementService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,31 +12,30 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@Service
 public class GameLayerAchievementService extends GameLayerService implements IGameLayerAchievementService {
 
-    public GameLayerAchievementService() {
-        super();
-    }
-
-    public GameLayerAchievementService(HttpClient httpClient) {
-        super(httpClient);
+    @Autowired
+    public GameLayerAchievementService(@Value("${api.gamelayer.key}") String apiKey,
+                                 @Value("${api.gamelayer.accountId}") String accountId) {
+        super(apiKey, accountId);
     }
 
     @Override
-    public HttpResponse getAchievementById(String achievementId, String account) throws IOException, InterruptedException {
+    public HttpResponse getAchievementById(String achievementId) throws IOException, InterruptedException {
         String encodedachievementId = URLEncoder.encode(achievementId, "UTF-8");
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/achievements/"
+        String fullUrl = super.getApiUrl() + "/api/v0/achievements/"
                 + encodedachievementId
                 + "?account=" + encodedAccount
                 + "&language=fr";
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -45,16 +47,16 @@ public class GameLayerAchievementService extends GameLayerService implements IGa
     }
 
     @Override
-    public HttpResponse getAllAchievements(String account) throws IOException, InterruptedException {
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+    public HttpResponse getAllAchievements() throws IOException, InterruptedException {
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/achievements" + "?account=" + encodedAccount;
+        String fullUrl = super.getApiUrl() + "/api/v0/achievements" + "?account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),

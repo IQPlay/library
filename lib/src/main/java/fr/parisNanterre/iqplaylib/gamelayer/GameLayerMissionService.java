@@ -1,6 +1,9 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerMissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,32 +12,31 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@Service
 public class GameLayerMissionService extends GameLayerService implements IGameLayerMissionService
 {
 
-    public GameLayerMissionService() {
-        super();
-    }
-
-    public GameLayerMissionService(HttpClient httpClient) {
-        super(httpClient);
+    @Autowired
+    public GameLayerMissionService(@Value("${api.gamelayer.key}") String apiKey,
+                                  @Value("${api.gamelayer.accountId}") String accountId) {
+        super(apiKey, accountId);
     }
 
     @Override
-    public HttpResponse getMissionById(String missionId, String account) throws IOException, InterruptedException {
+    public HttpResponse getMissionById(String missionId) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(missionId, "UTF-8");
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/missions/"
+        String fullUrl = super.getApiUrl() + "/api/v0/missions/"
                 + encodedEventId
                 + "?account=" + encodedAccount
                 + "&language=fr";
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -46,16 +48,16 @@ public class GameLayerMissionService extends GameLayerService implements IGameLa
     }
 
     @Override
-    public HttpResponse getAllMissions(String account) throws IOException, InterruptedException {
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+    public HttpResponse getAllMissions() throws IOException, InterruptedException {
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/missions" + "?account=" + encodedAccount;
+        String fullUrl = super.getApiUrl() + "/api/v0/missions" + "?account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),

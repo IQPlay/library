@@ -1,6 +1,9 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerStreakService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,32 +12,32 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@Service
 public class GameLayerStreakService extends GameLayerService implements IGameLayerStreakService {
 
 
-    public GameLayerStreakService() {
-        super();
+    @Autowired
+    public GameLayerStreakService(@Value("${api.gamelayer.key}") String apiKey,
+                                 @Value("${api.gamelayer.accountId}") String accountId) {
+        super(apiKey, accountId);
     }
 
-    public GameLayerStreakService(HttpClient httpClient) {
-        super(httpClient);
-    }
 
     @Override
-    public HttpResponse getStreakById(String streakId, String account) throws IOException, InterruptedException {
+    public HttpResponse getStreakById(String streakId) throws IOException, InterruptedException {
         String encodedEventId = URLEncoder.encode(streakId, "UTF-8");
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/streaks/"
+        String fullUrl = super.getApiUrl() + "/api/v0/streaks/"
                 + encodedEventId
                 + "?account=" + encodedAccount
                 + "&language=fr";
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -46,16 +49,16 @@ public class GameLayerStreakService extends GameLayerService implements IGameLay
     }
 
     @Override
-    public HttpResponse getAllStreaks(String account) throws IOException, InterruptedException {
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+    public HttpResponse getAllStreaks() throws IOException, InterruptedException {
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/streaks" + "?account=" + encodedAccount;
+        String fullUrl = super.getApiUrl() + "/api/v0/streaks" + "?account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),

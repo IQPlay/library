@@ -8,3 +8,4 @@ build
 .idea
 gradle.properties
 /docs/
+/lib/src/main/resources/application.properties

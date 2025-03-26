@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 
 public interface IPlayerPrizes {
-    HttpResponse getPrizesByPlayer(String player, String account) throws IOException, InterruptedException;
+    HttpResponse getPrizesByPlayer(String player) throws IOException, InterruptedException;
 }
