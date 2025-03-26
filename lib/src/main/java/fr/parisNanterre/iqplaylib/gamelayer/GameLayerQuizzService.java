@@ -1,6 +1,9 @@
 package fr.parisnanterre.iqplaylib.gamelayer;
 
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerQuizzService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,30 +13,29 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
+@Service
 public class GameLayerQuizzService extends GameLayerService implements IGameLayerQuizzService {
 
-    public GameLayerQuizzService() {
-        super();
-    }
-
-    public GameLayerQuizzService(HttpClient httpClient) {
-        super(httpClient);
+    @Autowired
+    public GameLayerQuizzService(@Value("${api.gamelayer.key}") String apiKey,
+                                  @Value("${api.gamelayer.accountId}") String accountId) {
+        super(apiKey, accountId);
     }
 
     @Override
-    public HttpResponse getQuizzById(String quizz, String account) throws IOException, InterruptedException {
+    public HttpResponse getQuizzById(String quizz) throws IOException, InterruptedException {
         String encodedQuizz = URLEncoder.encode(quizz, "UTF-8");
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/quizzes/"
+        String fullUrl = super.getApiUrl() + "/api/v0/quizzes/"
                 + encodedQuizz
                 + "?account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -45,16 +47,16 @@ public class GameLayerQuizzService extends GameLayerService implements IGameLaye
     }
 
     @Override
-    public HttpResponse getQuizzes(String account) throws IOException, InterruptedException {
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+    public HttpResponse getQuizzes() throws IOException, InterruptedException {
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/quizzes" + "?account=" + encodedAccount;
+        String fullUrl = super.getApiUrl() + "/api/v0/quizzes" + "?account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -66,19 +68,19 @@ public class GameLayerQuizzService extends GameLayerService implements IGameLaye
     }
 
     @Override
-    public HttpResponse getQuizzesByPlayer(String player, String account) throws IOException, InterruptedException {
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+    public HttpResponse getQuizzesByPlayer(String player) throws IOException, InterruptedException {
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/quizzes?"
+        String fullUrl = super.getApiUrl() + "/api/v0/quizzes?"
                 + "player=" + encodedPlayer
                 + "&account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -90,19 +92,19 @@ public class GameLayerQuizzService extends GameLayerService implements IGameLaye
     }
 
     @Override
-    public HttpResponse getResultOfQuizz(String quizz, String account) throws IOException, InterruptedException {
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+    public HttpResponse getResultOfQuizz(String quizz) throws IOException, InterruptedException {
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
         String encodedQuizz = URLEncoder.encode(quizz, "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/quizzes/"
+        String fullUrl = super.getApiUrl() + "/api/v0/quizzes/"
                 + encodedQuizz + "/result?"
                 + "&account=" + encodedAccount;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -114,21 +116,21 @@ public class GameLayerQuizzService extends GameLayerService implements IGameLaye
     }
 
     @Override
-    public HttpResponse getResultOfQuizzByPlayer(String quizz, String account, String player) throws IOException, InterruptedException {
+    public HttpResponse getResultOfQuizzByPlayer(String quizz, String player) throws IOException, InterruptedException {
         String encodedQuizz = URLEncoder.encode(quizz, "UTF-8");
-        String encodedAccount = URLEncoder.encode(account, "UTF-8");
+        String encodedAccount = URLEncoder.encode(super.getAccountId(), "UTF-8");
         String encodedPlayer = URLEncoder.encode(player, "UTF-8");
 
-        String fullUrl = API_URL + "/api/v0/quizzes/"
+        String fullUrl = super.getApiUrl() + "/api/v0/quizzes/"
                 + encodedQuizz + "/result?"
                 + "account=" + encodedAccount
                 + "&player=" + encodedPlayer;
 
-        HttpResponse response = httpClient.send(
+        HttpResponse response = super.getHttpClient().send(
                 HttpRequest.newBuilder()
                         .uri(URI.create(fullUrl))
                         .headers(
-                                "api-key", API_KEY
+                                "api-key", super.getApiKey()
                         )
                         .GET()
                         .build(),
@@ -139,13 +141,19 @@ public class GameLayerQuizzService extends GameLayerService implements IGameLaye
         return response;
     }
 
+    /**
+     * @TODO méthode à implémenter
+     */
     @Override
-    public HttpResponse startAQuizz(String quizz, String account, String player) {
+    public HttpResponse startAQuizz(String quizz, String player) {
         return null;
     }
 
+    /**
+     * @TODO méthode à implémenter
+     */
     @Override
-    public HttpResponse completeQuizz(String quizz, String account, String player, ArrayList<String> answers) {
+    public HttpResponse completeQuizz(String quizz, String player, ArrayList<String> answers) {
         return null;
     }
 }

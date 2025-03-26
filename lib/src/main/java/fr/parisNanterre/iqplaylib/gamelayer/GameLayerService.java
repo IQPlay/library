@@ -2,56 +2,50 @@ package fr.parisnanterre.iqplaylib.gamelayer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.parisnanterre.iqplaylib.gamelayer.api.IGameLayerService;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
-import java.io.*;
 import java.net.http.HttpClient;
 import java.time.Duration;
-import java.util.Properties;
 
-@Service
 public abstract class GameLayerService implements IGameLayerService {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GameLayerService.class);
-    protected static String API_URL = "https://api.gamelayer.co";
-    protected static String API_KEY;
-    protected static String ACCOUNT_ID;
-    protected final ObjectMapper objectMapper = new ObjectMapper();
-    protected HttpClient httpClient;
+    private static final Logger logger = LoggerFactory.getLogger(GameLayerService.class);
+    private static final String API_URL = "https://api.gamelayer.co";
 
-    protected GameLayerService() {
-        this.httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(10))
-                .build();
+    private String apiKey;
+    private String accountId;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final HttpClient httpClient;
+
+    @Autowired
+    public GameLayerService(@Value("${api.gamelayer.key}") String apiKey,
+                            @Value("${api.gamelayer.accountId}") String accountId) {
+        this.apiKey = apiKey;
+        this.accountId = accountId;
+        this.httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
     }
 
-    protected GameLayerService(HttpClient httpClient) {
-        this.httpClient = httpClient;
+    public String getApiUrl() {
+        return API_URL;
     }
 
-    @PostConstruct
-    public void init() {
-        loadApiCredential();
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public static void loadApiCredential() {
-        try (InputStream input = GameLayerService.class.getClassLoader().getResourceAsStream("application.properties")) {
-            if (input == null) {
-                throw new IOException("Fichier application.properties introuvable !");
-            }
-            Properties properties = new Properties();
-            properties.load(input);
-            API_KEY = properties.getProperty("api.gamelayer.key");
-            ACCOUNT_ID = properties.getProperty("api.gamelayer.accountId");
-            if ((API_KEY == null || API_KEY.isEmpty()) || (ACCOUNT_ID == null || ACCOUNT_ID.isEmpty())) {
-                throw new IOException("Clé API GameLayer ou id du compte non trouvée !");
-            }
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public HttpClient getHttpClient() {
+        return httpClient;
+    }
+
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
     }
 
     protected void logInformation(String message) {
