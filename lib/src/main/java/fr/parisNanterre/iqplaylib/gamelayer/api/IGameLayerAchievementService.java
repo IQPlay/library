@@ -5,7 +5,7 @@ import java.net.http.HttpResponse;
 
 public interface IGameLayerAchievementService {
 
-    HttpResponse getAchievementById(String achievementId, String account) throws IOException, InterruptedException;
+    HttpResponse getAchievementById(String achievementId) throws IOException, InterruptedException;
 
-    HttpResponse getAllAchievements(String account) throws IOException, InterruptedException;
+    HttpResponse getAllAchievements() throws IOException, InterruptedException;
 }

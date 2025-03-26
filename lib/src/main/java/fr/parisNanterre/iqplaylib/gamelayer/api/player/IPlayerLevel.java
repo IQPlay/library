@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 
 public interface IPlayerLevel {
-    HttpResponse getLevelsByPlayer(String player, String account) throws IOException, InterruptedException;
+    HttpResponse getLevelsByPlayer(String player) throws IOException, InterruptedException;
 }
